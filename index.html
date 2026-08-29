@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tapzy.pk | NFC Review Cards and Smart Networking Products</title>
+    <meta
+      name="description"
+      content="Tapzy.pk offers NFC review stands, digital menu displays, and smart networking cards for businesses across Pakistan."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="index.html">
+          <span class="logo-circle logo-circle--sm">
+            <img src="assets/logo.png" alt="Tapzy.pk logo">
+          </span>
+          <span class="brand__text">
+            <span class="brand__name">Tapzy.pk</span>
+            <span class="brand__tag">NFC Review Cards</span>
+          </span>
+        </a>
+
+        <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">
+          Menu
+        </button>
+
+        <nav class="site-nav" id="site-nav" data-site-nav>
+          <a href="index.html#shop">Shop</a>
+          <a href="index.html#about">About</a>
+          <a href="cart.html" class="cart-link">
+            Cart
+            <span class="cart-link__count" data-cart-count hidden>0</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero__inner">
+          <div class="hero__top">
+            <span class="logo-circle logo-circle--lg hero__logo">
+              <img src="assets/logo.png" alt="">
+            </span>
+            <div class="hero__copy">
+              <p class="eyebrow">NFC products</p>
+              <h1>Smart NFC cards, built to move your business forward</h1>
+              <p class="hero__lead">
+                Tapzy.pk helps restaurants, shops, and professionals collect reviews,
+                share menus, and connect on LinkedIn or Instagram with one tap.
+              </p>
+            </div>
+          </div>
+          <div class="hero__actions">
+            <a class="btn btn-primary" href="#shop">Browse Products</a>
+            <a class="btn btn-secondary" href="cart.html">View Cart</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="shop">
+        <div class="container">
+          <div class="section__header">
+            <h2>Shop</h2>
+            <p>All products are pre-configured before dispatch. Bulk and offer pricing is shown on each product.</p>
+          </div>
+          <div class="product-grid" data-product-grid></div>
+        </div>
+      </section>
+
+      <section class="about-band" id="about">
+        <div class="container section about-band__grid">
+          <div class="about-band__content">
+            <h2>About Tapzy.pk</h2>
+
+            <p class="about-band__lead">
+              <strong>We're making everyday interactions simpler, one tap at a time.</strong>
+            </p>
+
+            <p>
+              We are a Pakistan-based NFC and QR solutions company focused on turning everyday tasks into simple, tap-to-connect experiences.
+            </p>
+
+            <p>
+              We design and build <strong>custom NFC and QR products from scratch</strong>, tailored to how businesses and individuals actually use them. From networking and social profiles to menus, reviews, and other everyday interactions, our products are designed to make sharing information faster, easier, and more convenient.
+            </p>
+
+            <p>
+              We don't just sell pre-made cards. <strong>We build solutions around the way you need to use them.</strong> Every product can be customized to your requirements and is available for both individual orders and bulk business needs.
+            </p>
+
+            <h3>Our Mission</h3>
+
+            <p>
+              We believe NFC should be more than a feature on your phone. It should be a practical part of everyday life.
+            </p>
+
+            <p>
+              Our mission is to make NFC <strong>accessible, efficient, and useful across Pakistan</strong>, replacing unnecessary steps, repetitive tasks, and physical exchanges with something as simple as a tap.
+            </p>
+
+            <p>
+              We want to bring more of everyday life into one simple interaction:
+            </p>
+
+            <p class="about-tagline"><strong>Tap. Connect. Done.</strong></p>
+          </div>
+
+          <aside class="about-highlights">
+            <p class="about-highlights__eyebrow">At a glance</p>
+            <ol class="about-highlights__list">
+              <li>
+                <span class="about-highlights__index" aria-hidden="true">01</span>
+                <span class="about-highlights__text">Pre-configured NFC and QR links before dispatch</span>
+              </li>
+              <li>
+                <span class="about-highlights__index" aria-hidden="true">02</span>
+                <span class="about-highlights__text">Acrylic stands for counters and reception desks</span>
+              </li>
+              <li>
+                <span class="about-highlights__index" aria-hidden="true">03</span>
+                <span class="about-highlights__text">PVC networking cards in standard wallet size</span>
+              </li>
+              <li>
+                <span class="about-highlights__index" aria-hidden="true">04</span>
+                <span class="about-highlights__text">
+                  Order support through
+                  <a href="https://wa.me/923375392447" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                  at +92 337 5392447
+                </span>
+              </li>
+            </ol>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__grid">
+        <div>
+          <strong>Tapzy.pk</strong>
+          <p>NFC review cards and smart business products.</p>
+        </div>
+        <div class="site-footer__links">
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="https://wa.me/923375392447" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </div>
+        <small>&copy; <span id="year"></span> Tapzy.pk. All rights reserved.</small>
+      </div>
+    </footer>
+
+    <div class="cart-notice" data-cart-notice hidden>Added to cart</div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script src="js/products.js"></script>
+    <script src="js/pricing.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

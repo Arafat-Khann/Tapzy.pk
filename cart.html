@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | Tapzy.pk</title>
+    <meta name="description" content="Review your Tapzy.pk cart and complete your order through WhatsApp.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="index.html">
+          <span class="logo-circle logo-circle--sm">
+            <img src="assets/logo.png" alt="Tapzy.pk logo">
+          </span>
+          <span class="brand__text">
+            <span class="brand__name">Tapzy.pk</span>
+            <span class="brand__tag">NFC Review Cards</span>
+          </span>
+        </a>
+
+        <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">
+          Menu
+        </button>
+
+        <nav class="site-nav" id="site-nav" data-site-nav>
+          <a href="index.html#shop">Shop</a>
+          <a href="index.html#about">About</a>
+          <a href="cart.html" class="cart-link">
+            Cart
+            <span class="cart-link__count" data-cart-count hidden>0</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container cart-page">
+      <h1>Your Cart</h1>
+
+      <div class="empty-state" data-cart-empty>
+        <p>Your cart is empty.</p>
+        <a class="btn btn-primary" href="index.html#shop">Continue Shopping</a>
+      </div>
+
+      <div data-cart-panel hidden>
+        <div class="cart-list" data-cart-list></div>
+        <div class="cart-panel">
+          <p class="cart-panel__total">Cart Total: <strong data-cart-total>PKR 0</strong></p>
+          <p>Enter your details before checkout. WhatsApp will open with a complete invoice ready to send.</p>
+          <button class="btn btn-primary" type="button" data-checkout>Proceed to Checkout</button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__grid">
+        <div>
+          <strong>Tapzy.pk</strong>
+          <p>NFC review cards and smart business products.</p>
+        </div>
+        <div class="site-footer__links">
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="https://wa.me/923375392447" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </div>
+        <small>&copy; <span id="year"></span> Tapzy.pk. All rights reserved.</small>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script src="js/products.js"></script>
+    <script src="js/pricing.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
