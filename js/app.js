@@ -22,6 +22,21 @@ function renderPricingBlock(product, className, options = {}) {
   `;
 }
 
+function renderBulkInquiryNote(productTitle = "") {
+  const message = productTitle
+    ? `Hello Tapzy.pk, I would like to inquire about bulk orders for ${productTitle}.`
+    : "Hello Tapzy.pk, I would like to inquire about bulk orders.";
+  const url = `https://wa.me/${TAPZY_WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+  return `
+    <p class="product-bulk-note">
+      <a href="${url}" target="_blank" rel="noopener noreferrer">
+        Send inquiry message on WhatsApp for bulk orders
+      </a>
+    </p>
+  `;
+}
+
 function renderQuantityStepper(productId, ariaLabel = "Quantity") {
   const qtyAttributes = productId
     ? `data-product-qty="${productId}"`
@@ -68,6 +83,7 @@ function renderProductCard(product) {
           Buy Now
         </button>
       </div>
+      ${renderBulkInquiryNote(product.title)}
     </div>
   `;
   return article;
@@ -125,6 +141,7 @@ function renderProductDetail() {
             Buy Now
           </button>
         </div>
+        ${renderBulkInquiryNote(product.title)}
 
         <div class="product-specs">
           <h2>Product Details</h2>
