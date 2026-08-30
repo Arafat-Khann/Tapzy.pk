@@ -7,16 +7,18 @@ function setCartBadge() {
   badge.hidden = count === 0;
 }
 
-function renderPricingBlock(product, className, options = {}) {
+function renderPricingBlock(product, className, options = {}, quantity = 1) {
   const { showNote = true } = options;
+  const line = calculateLineItem(product.id, quantity);
+  const unitPrice = line ? formatPkr(line.lineTotal) : product.priceLabel;
   const note =
-    showNote && product.pricingNote
-      ? `<p class="${className}__note">${product.pricingNote}</p>`
+    showNote && (line?.rateNote || product.pricingNote)
+      ? `<p class="${className}__note">${line?.rateNote || product.pricingNote}</p>`
       : "";
 
   return `
     <div class="${className}">
-      <p class="${className}__price">${product.priceLabel}</p>
+      <p class="${className}__price">${unitPrice}</p>
       ${note}
     </div>
   `;
@@ -73,7 +75,7 @@ function renderProductCard(product) {
       <h2 class="product-card__title">
         <a href="product.html?id=${product.id}">${product.title}</a>
       </h2>
-      ${renderPricingBlock(product, "product-card__pricing", { showNote: false })}
+      ${renderPricingBlock(product, "product-card__pricing", { showNote: false }, 1)}
       <div class="product-card__actions">
         <button type="button" class="btn btn-secondary" data-add-to-cart="${product.id}">
           Add to Cart
@@ -130,7 +132,7 @@ function renderProductDetail() {
         <p class="eyebrow">Tapzy.pk Product</p>
         <h1>${product.title}</h1>
         <p class="product-detail__summary">${product.summary}</p>
-        ${renderPricingBlock(product, "product-detail__pricing", { showNote: true })}
+        ${renderPricingBlock(product, "product-detail__pricing", { showNote: true }, 1)}
 
         <div class="product-detail__actions">
           <button type="button" class="btn btn-secondary" data-add-to-cart="${product.id}">
@@ -234,6 +236,31 @@ function getRequestedQuantity(trigger) {
   return Number.isFinite(value) && value > 0 ? value : 1;
 }
 
+function updatePricingForQuantity(input) {
+  const productId = input.getAttribute("data-product-qty") || new URLSearchParams(window.location.search).get("id");
+  const product = getProductById(productId);
+
+  if (!product || !input) return;
+
+  const quantity = Math.max(1, Number.parseInt(input.value, 10) || 1);
+  const container = input.closest("[data-product-detail], .product-card");
+  if (!container) return;
+
+  const pricingTarget = container.querySelector(".product-card__pricing, .product-detail__pricing");
+  if (!pricingTarget) return;
+
+  const className = pricingTarget.classList.contains("product-detail__pricing")
+    ? "product-detail__pricing"
+    : "product-card__pricing";
+
+  pricingTarget.innerHTML = renderPricingBlock(
+    product,
+    className,
+    { showNote: className === "product-detail__pricing" },
+    quantity
+  );
+}
+
 function bindCommerceActions() {
   document.addEventListener("click", (event) => {
     const upButton = event.target.closest("[data-qty-up]");
@@ -296,6 +323,18 @@ function bindCommerceActions() {
       if (!items.length) return;
       startCheckout(items);
     }
+  });
+
+  document.addEventListener("input", (event) => {
+    const qtyInput = event.target.closest("[data-product-qty]");
+    if (!qtyInput) return;
+
+    const value = Number.parseInt(qtyInput.value, 10);
+    if (!Number.isFinite(value) || value < 1) {
+      qtyInput.value = "1";
+    }
+
+    updatePricingForQuantity(qtyInput);
   });
 
   document.addEventListener("change", (event) => {
