@@ -374,6 +374,7 @@ dd {
   object-fit: cover;
   object-position: center;
   display: block;
+  transform: none;
 }
 
 .product-card__title {
@@ -688,6 +689,7 @@ dd {
   object-fit: cover;
   object-position: center;
   display: block;
+  transform: none;
 }
 
 .product-detail__info h1 {
