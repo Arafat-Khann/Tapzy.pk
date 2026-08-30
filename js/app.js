@@ -271,6 +271,7 @@ function bindCommerceActions() {
       const input = stepper?.querySelector("[data-product-qty]");
       if (input) {
         adjustQuantity(input, upButton ? 1 : -1);
+        updatePricingForQuantity(input);
       }
       return;
     }
