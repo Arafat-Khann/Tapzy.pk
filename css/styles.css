@@ -38,6 +38,16 @@ body {
   background: var(--surface);
 }
 
+::selection {
+  background: rgba(34, 112, 204, 0.28);
+  color: var(--ink);
+}
+
+::-moz-selection {
+  background: rgba(34, 112, 204, 0.28);
+  color: var(--ink);
+}
+
 img {
   display: block;
   max-width: 100%;
