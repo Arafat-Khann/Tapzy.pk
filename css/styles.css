@@ -374,6 +374,8 @@ dd {
   object-fit: cover;
   object-position: center;
   display: block;
+  transform: scale(1.18);
+  transform-origin: center center;
 }
 
 .product-card__title {
@@ -688,6 +690,8 @@ dd {
   object-fit: cover;
   object-position: center;
   display: block;
+  transform: scale(1.18);
+  transform-origin: center center;
 }
 
 .product-detail__info h1 {
