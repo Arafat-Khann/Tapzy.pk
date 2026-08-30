@@ -249,7 +249,7 @@ dd {
   font-weight: 300;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--blue-100);
+  color: #0055ff;
 }
 
 .hero h1 {
