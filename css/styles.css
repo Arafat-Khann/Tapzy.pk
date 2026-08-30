@@ -359,16 +359,21 @@ dd {
 
 .product-card__media {
   display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: var(--white);
-  border-radius: 14px;
+  background: linear-gradient(135deg, #f5f8fc, #edf3fb);
+  border-radius: 18px;
+  padding: 0;
 }
 
 .product-card__media img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .product-card__title {
@@ -667,12 +672,22 @@ dd {
 }
 
 .product-detail__gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--line);
-  background: var(--surface-card);
+  background: linear-gradient(135deg, #f5f8fc, #edf3fb);
+  border-radius: 22px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
 }
 
 .product-detail__gallery img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .product-detail__info h1 {
