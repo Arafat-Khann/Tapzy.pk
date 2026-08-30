@@ -350,6 +350,7 @@ dd {
   padding: 1rem;
   background: var(--surface-card);
   border: 1px solid var(--line);
+  border-radius: 18px;
 }
 
 .product-card__media {
@@ -357,6 +358,7 @@ dd {
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--white);
+  border-radius: 14px;
 }
 
 .product-card__media img {
