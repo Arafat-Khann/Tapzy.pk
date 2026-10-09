@@ -49,14 +49,13 @@ The five original product files in `assets/products/` were replaced by optimized
 - Existing coded prices were not changed. The Google review pricing jump from PKR 2,500 for 1–49 to PKR 600 for 50–99 is surfaced for owner confirmation.
 - The old `product.html?id=` template remains as a compatibility fallback, while Vercel redirects known IDs to static URLs.
 
-## Questions for owner
+## Owner decisions recorded
 
-1. Is the Google review tier of PKR 600 each for 50–99 units correct?
-2. Is `@tapzypk` the intended real handle for the LinkedIn product copy?
-3. Which products are currently in stock, and may availability be added to schema?
-4. What business address, return policy, and payment methods should be published?
-5. Do any supplied logo/product photos visibly contain `Tapzy.pk`, and can updated artwork be supplied?
-6. Is there a real customer photo or case study with permission to publish?
+- The Google review tier of PKR 600 each for 50–99 units is confirmed correct.
+- `@tapzypk` is confirmed as the correct handle.
+- Availability/stock schema is not needed at this time.
+- Business address, return policy, payment methods, and case-study/customer imagery do not need to be added at this time.
+- Existing artwork may retain visible `Tapzy.pk` branding.
 
 ## Manual tasks after approval
 
