@@ -21,7 +21,8 @@ function escapeHtml(value) {
 }
 
 function prefixFor(slug) {
-  return slug.split("/").filter(Boolean).length ? "../".repeat(slug.split("/").filter(Boolean).length) : "";
+  const directoryDepth = slug.split("/").filter(Boolean).length;
+  return "../".repeat(directoryDepth);
 }
 
 function header(prefix) {
