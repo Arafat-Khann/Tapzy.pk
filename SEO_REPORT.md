@@ -39,7 +39,7 @@ The final case-insensitive text search finds no old brand phrase in tracked text
 | Favicon | 632.6 KB source | 1.2 KB at 32px; 72.6 KB at 512px | Small browser icon |
 | Social image | — | 61.3 KB, 1200x630 JPG | Under 200 KB |
 
-The five original product files in `assets/product-images/` were replaced by optimized fallbacks; their untouched copies and the `Products/` source tree are under `_originals/`.
+The five original product files in `product-images/` were replaced by optimized fallbacks; their untouched copies and the `Products/` source tree are under `_originals/`.
 
 ## Deliberate non-changes
 
