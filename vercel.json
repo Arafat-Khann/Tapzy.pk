@@ -1,6 +1,6 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
+  "trailingSlash": true,
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/product.html", "has": [{ "type": "query", "key": "id", "value": "google-review-stand" }], "destination": "/google-review-nfc-card/", "permanent": true },
