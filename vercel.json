@@ -1,0 +1,23 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/product.html", "has": [{ "type": "query", "key": "id", "value": "google-review-stand" }], "destination": "/google-review-nfc-card/", "permanent": true },
+    { "source": "/product.html", "has": [{ "type": "query", "key": "id", "value": "digital-menu-stand" }], "destination": "/digital-menu-nfc-card/", "permanent": true },
+    { "source": "/product.html", "has": [{ "type": "query", "key": "id", "value": "custom-review-stand" }], "destination": "/custom-nfc-cards/", "permanent": true },
+    { "source": "/product.html", "has": [{ "type": "query", "key": "id", "value": "linkedin-card" }], "destination": "/products/linkedin-nfc-card/", "permanent": true },
+    { "source": "/product.html", "has": [{ "type": "query", "key": "id", "value": "instagram-card" }], "destination": "/products/instagram-nfc-card/", "permanent": true },
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "tapzypk.me" }], "destination": "https://www.tapzypk.me/$1", "permanent": true },
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "*.vercel.app" }], "destination": "https://www.tapzypk.me/$1", "permanent": true }
+  ],
+  "headers": [
+    { "source": "/(assets|css|js)/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
+    { "source": "/(.*)", "headers": [
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+      { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+      { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=()" }
+    ] }
+  ]
+}
