@@ -7,6 +7,7 @@ function formatPkr(amount) {
 const PRODUCTS = [
   {
     id: "google-review-stand",
+    url: "/google-review-nfc-card/",
     title: "Tapzy Google Review Acrylic Card",
     price: 2500,
     priceLabel: "PKR 2,500",
@@ -27,6 +28,7 @@ const PRODUCTS = [
   },
   {
     id: "digital-menu-stand",
+    url: "/digital-menu-nfc-card/",
     title: "Tapzy Smart NFC & QR Digital Menu Card",
     price: 2500,
     priceLabel: "PKR 2,500",
@@ -47,6 +49,7 @@ const PRODUCTS = [
   },
   {
     id: "custom-review-stand",
+    url: "/custom-nfc-cards/",
     title: "Tapzy Custom Branded Google Review NFC Display Card",
     price: 3000,
     priceLabel: "PKR 3,000",
@@ -67,6 +70,7 @@ const PRODUCTS = [
   },
   {
     id: "linkedin-card",
+    url: "/products/linkedin-nfc-card/",
     title: "Tapzy Smart NFC & QR LinkedIn Networking Card",
     price: 1500,
     priceLabel: "PKR 1,500",
@@ -77,7 +81,7 @@ const PRODUCTS = [
       "Instant Tap-to-Connect: Embedded NFC technology lets you share your LinkedIn profile immediately by simply tapping your card against another person's phone.",
       "Universal QR Code Option: Includes a clean, scannable QR code on the reverse side to ensure effortless connection even with devices that don't use NFC.",
       "Stand Out and Be Remembered: Replaces traditional paper cards with a modern, high-tech networking tool that leaves a lasting, professional impression on everyone you meet.",
-      "Sleek & Professional Design: Features a polished corporate look with clean typography, the recognizable LinkedIn branding, and your @tapzy.pk handle.",
+      "Sleek & Professional Design: Features a polished corporate look with clean typography, the recognizable LinkedIn branding, and your @tapzypk handle.",
     ],
     dimensions: "5.398 x 8.56 cm (Standard Credit Card Size)",
     materials: "PVC",
@@ -86,6 +90,7 @@ const PRODUCTS = [
   },
   {
     id: "instagram-card",
+    url: "/products/instagram-nfc-card/",
     title: "Tapzy Smart NFC & QR Instagram Networking Card",
     price: 1500,
     priceLabel: "PKR 1,500",
@@ -110,7 +115,7 @@ function getProductById(id) {
 
 function formatWhatsAppInvoice(items, customer) {
   const lines = [
-    "TAPZY.PK - ORDER INVOICE",
+    "TAPZY - ORDER INVOICE",
     "========================",
     "",
     "CUSTOMER DETAILS",

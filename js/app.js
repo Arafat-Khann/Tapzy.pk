@@ -26,8 +26,8 @@ function renderPricingBlock(product, className, options = {}, quantity = 1) {
 
 function renderBulkInquiryNote(productTitle = "") {
   const message = productTitle
-    ? `Hello Tapzy.pk, I would like to inquire about bulk orders for ${productTitle}.`
-    : "Hello Tapzy.pk, I would like to inquire about bulk orders.";
+    ? `Hello Tapzy, I would like to inquire about bulk orders for ${productTitle}.`
+    : "Hello Tapzy, I would like to inquire about bulk orders.";
   const url = `https://wa.me/${TAPZY_WHATSAPP}?text=${encodeURIComponent(message)}`;
 
   return `
@@ -68,12 +68,15 @@ function renderProductCard(product) {
   const article = document.createElement("article");
   article.className = "product-card";
   article.innerHTML = `
-    <a class="product-card__media" href="product.html?id=${product.id}">
-      <img src="${product.image}" alt="${product.title}" loading="lazy" width="600" height="600">
+    <a class="product-card__media" href="${product.url}">
+      <picture>
+        <source srcset="${product.image.replace(".jpg", "-500.webp")} 500w, ${product.image.replace(".jpg", ".webp")} 1000w" sizes="(max-width: 720px) 50vw, 300px" type="image/webp">
+        <img src="${product.image}" alt="${product.title}" loading="lazy" width="1000" height="1000">
+      </picture>
     </a>
     <div class="product-card__body">
       <h2 class="product-card__title">
-        <a href="product.html?id=${product.id}">${product.title}</a>
+        <a href="${product.url}">${product.title}</a>
       </h2>
       ${renderPricingBlock(product, "product-card__pricing", { showNote: false }, 1)}
       <div class="product-card__actions">
@@ -103,6 +106,7 @@ function renderProductDetail() {
   if (!root) return;
 
   const params = new URLSearchParams(window.location.search);
+  if (!params.has("id") && root.hasAttribute("data-static-product")) return;
   const product = getProductById(params.get("id"));
 
   if (!product) {
@@ -110,26 +114,29 @@ function renderProductDetail() {
       <div class="empty-state">
         <h1>Product not found</h1>
         <p>The product you are looking for is unavailable.</p>
-        <a class="btn btn-primary" href="index.html">Back to Shop</a>
+        <a class="btn btn-primary" href="/">Back to Shop</a>
       </div>
     `;
     return;
   }
 
-  document.title = `${product.title} | Tapzy.pk`;
+  document.title = `${product.title} | Tapzy`;
 
   const featureList = product.features
     .map((feature) => `<li>${feature}</li>`)
     .join("");
 
   root.innerHTML = `
-    <p><a href="index.html#shop">Back to Shop</a></p>
+    <p><a href="/#shop">Back to Shop</a></p>
     <div class="product-detail">
       <div class="product-detail__gallery">
-        <img src="${product.image}" alt="${product.title}" width="800" height="800">
+        <picture>
+          <source srcset="${product.image.replace(".jpg", "-500.webp")} 500w, ${product.image.replace(".jpg", ".webp")} 1000w" sizes="(max-width: 720px) 100vw, 50vw" type="image/webp">
+          <img src="${product.image}" alt="${product.title}" width="1000" height="1000" fetchpriority="high">
+        </picture>
       </div>
       <div class="product-detail__info">
-        <p class="eyebrow">Tapzy.pk Product</p>
+        <p class="eyebrow">Tapzy Product</p>
         <h1>${product.title}</h1>
         <p class="product-detail__summary">${product.summary}</p>
         ${renderPricingBlock(product, "product-detail__pricing", { showNote: true }, 1)}
