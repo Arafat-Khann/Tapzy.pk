@@ -12,7 +12,7 @@ const PRODUCTS = [
     price: 2500,
     priceLabel: "PKR 2,500",
     pricingNote: "1-49: PKR 2,500 each · 50-99: PKR 600 each · 100+: PKR 550 each",
-    image: "assets/products/google-review-stand.jpg",
+    image: "assets/product-images/google-review-stand.jpg",
     summary:
       "Boost your business ratings instantly with this sleek, dual-action display card that lets customers leave a 5-star review in seconds with a simple tap or scan.",
     features: [
@@ -33,7 +33,7 @@ const PRODUCTS = [
     price: 2500,
     priceLabel: "PKR 2,500",
     pricingNote: "10 for PKR 17,000 (OFFER)",
-    image: "assets/products/digital-menu-stand.jpg",
+    image: "assets/product-images/digital-menu-stand.jpg",
     summary:
       "Upgrade your restaurant, cafe, or dining experience with a modern touchless menu card that lets customers instantly view your full digital menu by simply tapping or scanning with their phone.",
     features: [
@@ -54,7 +54,7 @@ const PRODUCTS = [
     price: 3000,
     priceLabel: "PKR 3,000",
     pricingNote: "Orders over 8: PKR 2,200 per card",
-    image: "assets/products/custom-review-stand.jpg",
+    image: "assets/product-images/custom-review-stand.jpg",
     summary:
       "Drive more 5-star Google reviews effortlessly with a fully customized card tailored to your brand's unique colors, logo, and ambient style, fully pre-configured and ready to use right out of the box.",
     features: [
@@ -74,7 +74,7 @@ const PRODUCTS = [
     title: "Tapzy Smart NFC & QR LinkedIn Networking Card",
     price: 1500,
     priceLabel: "PKR 1,500",
-    image: "assets/products/linkedin-card.jpg",
+    image: "assets/product-images/linkedin-card.jpg",
     summary:
       "Skip the hassle of typing out names at networking events and make an unforgettable first impression. Let professionals instantly pull up your LinkedIn profile with a single tap or scan.",
     features: [
@@ -94,7 +94,7 @@ const PRODUCTS = [
     title: "Tapzy Smart NFC & QR Instagram Networking Card",
     price: 1500,
     priceLabel: "PKR 1,500",
-    image: "assets/products/instagram-card.jpg",
+    image: "assets/product-images/instagram-card.jpg",
     summary:
       "Share your Instagram handle instantly and leave a lasting impression with this creative, pocket-sized smart card designed for content creators, influencers, and professionals on the go.",
     features: [
