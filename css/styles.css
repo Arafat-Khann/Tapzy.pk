@@ -360,6 +360,289 @@ dd {
     justify-content: center;
   }
 
+  .review-hero {
+    color: var(--white);
+    background: radial-gradient(circle at 85% 20%, #245a91 0, transparent 38%), var(--navy-900);
+  }
+
+  .review-hero__grid {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    padding-block: 3.5rem;
+  }
+
+  .review-hero__copy h1 {
+    max-width: 13ch;
+    margin: 0;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.08;
+  }
+
+  .review-hero__lead {
+    max-width: 55ch;
+    color: #d3e2f1;
+    font-size: 1.1rem;
+  }
+
+  .review-hero .eyebrow,
+  .review-hero .trust-line {
+    color: #b8d5f3;
+  }
+
+  .review-hero__media {
+    overflow: hidden;
+    border: 1px solid #41688e;
+    border-radius: 24px;
+    background: #eaf2fa;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  }
+
+  .review-hero__media img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .trust-line {
+    margin-bottom: 0;
+    font-size: 0.88rem;
+  }
+
+  .offer-grid,
+  .steps-grid,
+  .evidence-gallery,
+  .proof-band__grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .offer-card,
+  .info-card,
+  .comparison-table > div,
+  .steps-grid article {
+    padding: 1.35rem;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--surface-card);
+  }
+
+  .offer-card {
+    position: relative;
+  }
+
+  .offer-card--featured {
+    border-color: var(--blue-600);
+    box-shadow: 0 10px 30px rgba(34, 112, 204, 0.12);
+  }
+
+  .offer-card__badge {
+    position: absolute;
+    top: 0;
+    right: 1.35rem;
+    margin: 0;
+    padding: 0.3rem 0.55rem;
+    color: var(--white);
+    background: var(--blue-600);
+    border-radius: 0 0 7px 7px;
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+
+  .offer-card__label {
+    margin: 0;
+    color: var(--blue-700);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .offer-card h3 {
+    margin: 0.55rem 0;
+    font-size: 1.7rem;
+  }
+
+  .offer-card h3 del {
+    color: var(--ink-muted);
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .offer-card h3 strong {
+    color: var(--blue-700);
+    white-space: nowrap;
+  }
+
+  .offer-card ul,
+  .check-list {
+    padding-left: 1.2rem;
+  }
+
+  .offer-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+
+  .proof-band {
+    color: var(--white);
+    background: var(--navy-800);
+  }
+
+  .proof-band__grid {
+    padding-block: 1.7rem;
+  }
+
+  .proof-band__grid div {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .proof-band__grid span {
+    color: #c8d8ea;
+    font-size: 0.9rem;
+  }
+
+  .steps-grid article > span {
+    color: var(--blue-600);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+  }
+
+  .steps-grid h3 {
+    margin: 0.65rem 0 0.35rem;
+    font-size: 1.12rem;
+  }
+
+  .steps-grid p,
+  .comparison-grid p,
+  .info-card p {
+    color: var(--ink-muted);
+  }
+
+  .comparison-section,
+  .muted-section {
+    background: var(--surface-2);
+    border-block: 1px solid var(--line);
+  }
+
+  .comparison-table {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .comparison-table > div {
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .comparison-table span {
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+  }
+
+  .comparison-table__good {
+    border-color: #6ea3d7 !important;
+  }
+
+  .evidence-gallery figure {
+    margin: 0;
+  }
+
+  .evidence-gallery img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  .evidence-gallery figcaption {
+    margin-top: 0.45rem;
+    color: var(--ink-muted);
+    font-size: 0.85rem;
+  }
+
+  .evidence-policy {
+    background: #fbfcfe;
+  }
+
+  .evidence-policy__grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .details-grid {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .check-list {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .check-list li::marker {
+    color: var(--blue-600);
+  }
+
+  .info-card h3 {
+    margin-top: 0;
+  }
+
+  .final-cta {
+    padding-block: 3.5rem;
+    color: var(--white);
+    background: var(--navy-900);
+    text-align: center;
+  }
+
+  .final-cta h2 {
+    margin-top: 0;
+  }
+
+  .final-cta p {
+    margin-inline: auto;
+    color: #c8d8ea;
+  }
+
+  @media (min-width: 700px) {
+    .review-hero__grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      padding-block: 5rem;
+    }
+
+    .offer-grid,
+    .steps-grid,
+    .proof-band__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .evidence-gallery {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .evidence-policy__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .comparison-grid,
+    .details-grid {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+  }
+
+  @media (min-width: 980px) {
+    .steps-grid,
+    .proof-band__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
   .promo-ticker__track span:not(:first-child) {
     display: none;
   }

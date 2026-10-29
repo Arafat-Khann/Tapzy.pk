@@ -33,19 +33,15 @@ function calculateLineItem(productId, quantity) {
       break;
 
     case "google-review-stand":
-      if (qty < 50) {
-        unitPrice = 2500;
-        lineTotal = qty * unitPrice;
-        rateNote = "Standard rate (1-49): PKR 2,500 per card";
-      } else if (qty < 100) {
-        unitPrice = 600;
-        lineTotal = qty * unitPrice;
-        rateNote = "Bulk rate applied (50-99): PKR 600 per card";
-      } else {
-        unitPrice = 550;
-        lineTotal = qty * unitPrice;
-        rateNote = "Bulk rate applied (100+): PKR 550 per card";
-      }
+      unitPrice = 2500;
+      lineTotal = qty * unitPrice;
+      rateNote = "Single-card price: PKR 2,500";
+      break;
+
+    case "google-review-duo":
+      unitPrice = 4000;
+      lineTotal = qty * unitPrice;
+      rateNote = "Business Duo: two cards for PKR 4,000";
       break;
 
     default:

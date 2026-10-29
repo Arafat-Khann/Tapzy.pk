@@ -11,7 +11,7 @@ const PRODUCTS = [
     title: "Tapzy Google Review Acrylic Card",
     price: 2500,
     priceLabel: "PKR 2,500",
-    pricingNote: "1-49: PKR 2,500 each · 50-99: PKR 600 each · 100+: PKR 550 each",
+    pricingNote: "One card with both NFC and printed QR access",
     image: "product-images/google-review-stand.jpg",
     summary:
       "Boost your business ratings instantly with this sleek, dual-action display card that lets customers leave a 5-star review in seconds with a simple tap or scan.",
@@ -25,6 +25,25 @@ const PRODUCTS = [
     materials: "Acrylic",
     compatibility:
       "iOS / Android (compatible with all NFC-enabled smartphones and any device with a standard camera for QR code scanning)",
+  },
+  {
+    id: "google-review-duo",
+    url: "/google-review-nfc-card/",
+    title: "Tapzy Google Review Card — Business Duo",
+    price: 4000,
+    priceLabel: "PKR 4,000",
+    pricingNote: "Two pre-programmed cards for one business",
+    image: "product-images/google-review-stand.jpg",
+    summary: "Two Tapzy Google Review Cards for businesses that want review access at more than one counter or table.",
+    features: [
+      "Two acrylic cards, each with an NFC chip and printed QR code.",
+      "Both cards are pre-programmed to your Google review link before dispatch.",
+      "Each card can be reprogrammed for a new link later.",
+    ],
+    dimensions: "10 x 10 x 0.3 cm per card",
+    materials: "Acrylic",
+    compatibility: "iOS / Android NFC-enabled phones and standard camera QR scanning",
+    visibleInShop: false,
   },
   {
     id: "digital-menu-stand",
@@ -124,6 +143,7 @@ function formatWhatsAppInvoice(items, customer) {
     `Phone: ${customer.phone}`,
     `Email: ${customer.email}`,
     `Payment Method: ${customer.paymentMethod}`,
+    "Payment status: Not collected online; Tapzy will confirm the order and next steps.",
     "",
     "ORDER ITEMS",
     "-----------",

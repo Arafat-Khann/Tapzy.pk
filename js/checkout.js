@@ -12,7 +12,7 @@ function ensureCheckoutModal() {
     <div class="checkout-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
       <button type="button" class="checkout-modal__close" data-close-checkout aria-label="Close checkout form">&times;</button>
       <h2 id="checkout-title">Checkout Details</h2>
-      <p class="checkout-modal__intro">Fill in your details below. We will open WhatsApp with your invoice ready to send.</p>
+      <p class="checkout-modal__intro">Your order is sent to Tapzy on WhatsApp for confirmation. No payment is taken on this page.</p>
 
       <div class="checkout-summary" data-checkout-summary></div>
 
@@ -34,25 +34,25 @@ function ensureCheckoutModal() {
 
         <label>
           Email
-          <input type="email" name="email" autocomplete="email" required>
+          <input type="email" name="email" autocomplete="email">
         </label>
 
         <fieldset class="checkout-payment">
           <legend>Payment Method</legend>
           <label class="checkout-payment__option">
-            <input type="radio" name="paymentMethod" value="Bank Transfer" required>
-            Bank Transfer
+            <input type="radio" name="paymentMethod" value="Cash on Delivery" required>
+            Cash on Delivery
           </label>
           <label class="checkout-payment__option">
-            <input type="radio" name="paymentMethod" value="JazzCash">
-            JazzCash
+            <input type="radio" name="paymentMethod" value="Advance payment">
+            Advance payment (details confirmed by Tapzy)
           </label>
         </fieldset>
 
         <p class="checkout-form__error" data-checkout-error hidden></p>
 
         <button type="submit" class="btn btn-primary checkout-form__submit">
-          Send Order on WhatsApp
+          <span data-checkout-submit-label>Save order &amp; continue to WhatsApp</span>
         </button>
       </form>
     </div>
@@ -153,14 +153,15 @@ function validateCheckoutCustomer(customer) {
   if (!customer.name) return "Please enter your full name.";
   if (!customer.address) return "Please enter your delivery address.";
   if (!customer.phone) return "Please enter your phone number.";
-  if (!customer.email) return "Please enter your email address.";
   if (!customer.paymentMethod) return "Please select a payment method.";
   return "";
 }
 
-function submitCheckoutForm(modal) {
+async function submitCheckoutForm(modal) {
   const form = modal.querySelector("[data-checkout-form]");
   const error = modal.querySelector("[data-checkout-error]");
+  const submitButton = form.querySelector(".checkout-form__submit");
+  const submitLabel = form.querySelector("[data-checkout-submit-label]");
   const customer = getCheckoutCustomer(form);
   const validationMessage = validateCheckoutCustomer(customer);
 
@@ -176,10 +177,33 @@ function submitCheckoutForm(modal) {
     return;
   }
 
-  const message = formatWhatsAppInvoice(pendingCheckoutItems, customer);
-  const url = `https://wa.me/${TAPZY_WHATSAPP}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank", "noopener,noreferrer");
-  closeCheckoutModal();
+  submitButton.disabled = true;
+  submitLabel.textContent = "Saving order...";
+  error.hidden = true;
+
+  try {
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ customer, items: pendingCheckoutItems }),
+    });
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(result.error || "We could not save your order. Please try again.");
+    }
+
+    const message = `${formatWhatsAppInvoice(pendingCheckoutItems, customer)}\nOrder reference: ${result.orderNumber}`;
+    const url = `https://wa.me/${TAPZY_WHATSAPP}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+    closeCheckoutModal();
+  } catch (requestError) {
+    error.textContent = requestError.message;
+    error.hidden = false;
+  } finally {
+    submitButton.disabled = false;
+    submitLabel.textContent = "Save order & continue to WhatsApp";
+  }
 }
 
 function startCheckout(items) {

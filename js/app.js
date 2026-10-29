@@ -98,7 +98,7 @@ function renderProductGrid() {
   const grid = document.querySelector("[data-product-grid]");
   if (!grid) return;
 
-  grid.replaceChildren(...PRODUCTS.map(renderProductCard));
+  grid.replaceChildren(...PRODUCTS.filter((product) => product.visibleInShop !== false).map(renderProductCard));
 }
 
 function renderProductDetail() {
