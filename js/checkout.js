@@ -52,7 +52,7 @@ function ensureCheckoutModal() {
         <p class="checkout-form__error" data-checkout-error hidden></p>
 
         <button type="submit" class="btn btn-primary checkout-form__submit">
-          <span data-checkout-submit-label>Save order &amp; continue to WhatsApp</span>
+          Send order on WhatsApp
         </button>
       </form>
     </div>
@@ -157,11 +157,9 @@ function validateCheckoutCustomer(customer) {
   return "";
 }
 
-async function submitCheckoutForm(modal) {
+function submitCheckoutForm(modal) {
   const form = modal.querySelector("[data-checkout-form]");
   const error = modal.querySelector("[data-checkout-error]");
-  const submitButton = form.querySelector(".checkout-form__submit");
-  const submitLabel = form.querySelector("[data-checkout-submit-label]");
   const customer = getCheckoutCustomer(form);
   const validationMessage = validateCheckoutCustomer(customer);
 
@@ -177,33 +175,10 @@ async function submitCheckoutForm(modal) {
     return;
   }
 
-  submitButton.disabled = true;
-  submitLabel.textContent = "Saving order...";
-  error.hidden = true;
-
-  try {
-    const response = await fetch("/api/orders", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ customer, items: pendingCheckoutItems }),
-    });
-    const result = await response.json().catch(() => ({}));
-
-    if (!response.ok) {
-      throw new Error(result.error || "We could not save your order. Please try again.");
-    }
-
-    const message = `${formatWhatsAppInvoice(pendingCheckoutItems, customer)}\nOrder reference: ${result.orderNumber}`;
-    const url = `https://wa.me/${TAPZY_WHATSAPP}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-    closeCheckoutModal();
-  } catch (requestError) {
-    error.textContent = requestError.message;
-    error.hidden = false;
-  } finally {
-    submitButton.disabled = false;
-    submitLabel.textContent = "Save order & continue to WhatsApp";
-  }
+  const message = formatWhatsAppInvoice(pendingCheckoutItems, customer);
+  const url = `https://wa.me/${TAPZY_WHATSAPP}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank", "noopener,noreferrer");
+  closeCheckoutModal();
 }
 
 function startCheckout(items) {
