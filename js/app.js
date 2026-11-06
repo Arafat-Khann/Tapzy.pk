@@ -7,6 +7,21 @@ function setCartBadge() {
   badge.hidden = count === 0;
 }
 
+function getCheckoutUrl(packageId) {
+  const query = `?package=${encodeURIComponent(packageId)}`;
+  if (window.location.protocol !== "file:") {
+    return `/checkout/${query}`;
+  }
+
+  const path = window.location.pathname;
+  const prefix = path.includes("/products/")
+    ? "../../"
+    : path.includes("/google-review-nfc-card/")
+      ? "../"
+      : "";
+  return new URL(`${prefix}checkout/${query}`, window.location.href).href;
+}
+
 function renderPricingBlock(product, className, options = {}, quantity = 1) {
   const { showNote = true } = options;
   const line = calculateLineItem(product.id, quantity);
@@ -310,7 +325,7 @@ function bindCommerceActions() {
       const quantity = getRequestedQuantity(buyButton);
       if (isReviewOrder([{ id: product.id, quantity }]) || product.checkoutPackage) {
         const packageId = product.checkoutPackage || (product.id === "google-review-duo" ? "business_duo" : product.id === "google-review-trio" ? "business_trio" : "single_card");
-        window.location.assign(`/checkout/?package=${packageId}`);
+        window.location.assign(getCheckoutUrl(packageId));
         return;
       }
       startCheckout([

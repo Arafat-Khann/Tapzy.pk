@@ -159,6 +159,24 @@ async function submitReviewOrder(modal, customer) {
   return result;
 }
 
+function getOrderReceivedUrl() {
+  if (window.location.protocol !== "file:") {
+    return "/order-received/";
+  }
+
+  const path = window.location.pathname;
+  const prefix = path.includes("/products/")
+    ? "../../"
+    : path.includes("/checkout/")
+      ? "../"
+      : path.includes("/google-review-nfc-card/") ||
+        path.includes("/digital-menu-nfc-card/") ||
+        path.includes("/custom-nfc-cards/")
+        ? "../"
+        : "";
+  return new URL(`${prefix}order-received/`, window.location.href).href;
+}
+
 async function submitCheckoutForm(modal) {
   const form = modal.querySelector("[data-checkout-form]");
   const error = modal.querySelector("[data-checkout-error]");
@@ -182,7 +200,7 @@ async function submitCheckoutForm(modal) {
       if (!review) customer.packageId = getProductById(pendingCheckoutItems[0].id).checkoutPackage;
       const result = await submitReviewOrder(modal, customer);
       sessionStorage.setItem("tapzy_confirmation_token", result.confirmationToken);
-      window.location.assign("/order-received/");
+      window.location.assign(getOrderReceivedUrl());
     } else {
       openWhatsAppCheckout(pendingCheckoutItems, customer);
       closeCheckoutModal();
