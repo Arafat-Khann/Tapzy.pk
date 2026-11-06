@@ -29,7 +29,6 @@ function ensureCheckoutModal() {
         <strong>Processing your order</strong>
         <p>Please wait while we securely save your order. Do not close this window.</p>
       </div>
-      <div class="checkout-confirmation" data-checkout-confirmation hidden></div>
       <form class="checkout-form" data-checkout-form novalidate>
         <label>Full name<input type="text" name="name" autocomplete="name" maxlength="120" required></label>
         <label>Pakistani phone number<input type="tel" name="phone" autocomplete="tel" placeholder="03XX XXXXXXX" maxlength="20" required></label>
@@ -102,9 +101,7 @@ function openCheckoutModal(items) {
   const modal = document.querySelector("[data-checkout-modal]");
   const form = modal.querySelector("[data-checkout-form]");
   form.reset();
-  modal.querySelector("[data-checkout-confirmation]").hidden = true;
   modal.querySelector("[data-checkout-loading]").hidden = true;
-  modal.querySelector("[data-checkout-title]").textContent = "Complete your order";
   modal.querySelector("[data-checkout-summary]").hidden = false;
   modal.querySelector("[data-checkout-intro]").hidden = false;
   form.hidden = false;
@@ -172,43 +169,6 @@ async function submitReviewOrder(modal, customer) {
   return result;
 }
 
-function showConfirmation(modal, customer, result) {
-  setCheckoutLoading(modal, false);
-  modal.querySelector("[data-checkout-summary]").hidden = true;
-  modal.querySelector("[data-checkout-intro]").hidden = true;
-  modal.querySelector("[data-checkout-title]").textContent = "Order confirmed";
-  const confirmation = modal.querySelector("[data-checkout-confirmation]");
-  confirmation.hidden = false;
-  const packageDetails = REVIEW_PACKAGES[customer.packageId];
-  const paymentLabel = customer.paymentMethod === "cod"
-    ? "Cash on Delivery · Pending confirmation"
-    : "Advance payment · Pending verification";
-  confirmation.innerHTML = `
-    <div class="checkout-confirmation__mark" aria-hidden="true">✓</div>
-    <p class="eyebrow">Thank you, ${escapeCheckoutText(customer.name)}</p>
-    <h3>Order received</h3>
-    <p class="checkout-confirmation__lead">Your order has been securely submitted. We will confirm the details with you on WhatsApp.</p>
-    <div class="checkout-confirmation__number"><span>Order number</span><strong>${escapeCheckoutText(result.orderNumber)}</strong></div>
-    <dl class="checkout-confirmation__details">
-      <div><dt>Package</dt><dd>${escapeCheckoutText(packageDetails.label)}</dd></div>
-      <div><dt>Total</dt><dd>${formatPkr(result.totalAmount)}</dd></div>
-      <div><dt>Delivery location</dt><dd>${escapeCheckoutText(customer.city)}<br>${escapeCheckoutText(customer.address)}</dd></div>
-      <div><dt>Payment</dt><dd>${paymentLabel}</dd></div>
-    </dl>
-    <div class="checkout-confirmation__next"><strong>What happens next?</strong><p>Our team will message you on WhatsApp at <strong>${escapeCheckoutText(customer.phone)}</strong> to confirm your order, Google Maps URL, delivery address, and dispatch details.</p></div>
-    <button type="button" class="btn btn-primary" data-close-checkout>Done</button>`;
-}
-
-function escapeCheckoutText(value) {
-  return String(value).replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;",
-  }[character]));
-}
-
 async function submitCheckoutForm(modal) {
   const form = modal.querySelector("[data-checkout-form]");
   const error = modal.querySelector("[data-checkout-error]");
@@ -231,7 +191,12 @@ async function submitCheckoutForm(modal) {
     if (review) {
       setCheckoutLoading(modal, true);
       const result = await submitReviewOrder(modal, customer);
-      showConfirmation(modal, customer, result);
+      sessionStorage.setItem("tapzy_order_confirmation", JSON.stringify({
+        ...customer,
+        orderNumber: result.orderNumber,
+        totalAmount: result.totalAmount,
+      }));
+      window.location.assign("/order-confirmation.html");
     } else {
       openWhatsAppCheckout(pendingCheckoutItems, customer);
       closeCheckoutModal();

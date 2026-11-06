@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Received | Tapzy</title>
+  <meta name="description" content="Your Tapzy order has been received.">
+  <link rel="canonical" href="https://www.tapzypk.me/order-confirmation.html">
+  <link rel="icon" href="assets/favicon-32.png" type="image/png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="/"><span class="logo-circle logo-circle--sm"><img src="assets/logo.webp" alt="Tapzy logo" width="44" height="44"></span><span class="brand__text"><span class="brand__name">Tapzy</span><span class="brand__tag">NFC Review Cards</span></span></a>
+    </div>
+  </header>
+  <main class="order-confirmation-page">
+    <section class="order-confirmation-card" data-order-confirmation>
+      <div class="checkout-confirmation__mark" aria-hidden="true">✓</div>
+      <p class="eyebrow">Thank you</p>
+      <h1>Order received</h1>
+      <p class="checkout-confirmation__lead">Your order has been securely submitted. We will confirm the details with you on WhatsApp.</p>
+      <div class="checkout-confirmation__number"><span>Order number</span><strong data-order-number></strong></div>
+      <dl class="checkout-confirmation__details">
+        <div><dt>Package</dt><dd data-order-package></dd></div>
+        <div><dt>Total</dt><dd data-order-total></dd></div>
+        <div><dt>Delivery location</dt><dd data-order-location></dd></div>
+        <div><dt>Payment</dt><dd data-order-payment></dd></div>
+      </dl>
+      <div class="checkout-confirmation__next"><strong>What happens next?</strong><p>Our team will message you on WhatsApp at <strong data-order-phone></strong> to confirm your order, Google Maps URL, delivery address, and dispatch details.</p></div>
+      <a class="btn btn-primary" href="/">Continue shopping</a>
+    </section>
+    <section class="order-confirmation-card" data-order-missing hidden>
+      <h1>Order confirmation unavailable</h1>
+      <p>This confirmation link has expired or was opened on a different device. If you placed an order, please contact Tapzy on WhatsApp.</p>
+      <a class="btn btn-primary" href="/">Back to Tapzy</a>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container site-footer__grid"><div><strong>Tapzy</strong><p>NFC review cards and smart business products.</p></div><div class="site-footer__links"><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="https://wa.me/923375392447" target="_blank" rel="noopener noreferrer">WhatsApp</a></div><small>&copy; <span id="year"></span> Tapzy. All rights reserved.</small></div></footer>
+  <script src="js/order-confirmation.js"></script>
+</body>
+</html>
