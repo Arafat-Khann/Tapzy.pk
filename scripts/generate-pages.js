@@ -30,7 +30,7 @@ function header(prefix) {
     <header class="site-header">
       <div class="container site-header__inner">
         <a class="brand" href="${prefix}">
-          <span class="logo-circle logo-circle--sm"><img src="${prefix}assets/logo.webp" alt="Tapzy logo" width="44" height="44"></span>
+          <span class="logo-circle logo-circle--sm"><img src="${prefix}assets/logo.webp?v=logo-20261106" alt="Tapzy logo" width="44" height="44"></span>
           <span class="brand__text"><span class="brand__name">Tapzy</span><span class="brand__tag">NFC Review Cards</span></span>
         </a>
         <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
@@ -67,7 +67,7 @@ function shell({ slug, title, description, body, schema, noindex = false }) {
 <title>${escapeHtml(title)}</title><meta name="description" content="${escapeHtml(description)}">
 ${noindex ? '<meta name="robots" content="noindex,follow">' : `<link rel="canonical" href="${canonical}">`}
 <meta property="og:title" content="${escapeHtml(title)}"><meta property="og:description" content="${escapeHtml(description)}"><meta property="og:type" content="website"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${siteUrl}/assets/social-share.jpg"><meta property="og:site_name" content="Tapzy"><meta property="og:locale" content="en_PK"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeHtml(title)}"><meta name="twitter:description" content="${escapeHtml(description)}"><meta name="twitter:image" content="${siteUrl}/assets/social-share.jpg"><meta name="theme-color" content="#0c1a2e">
-<link rel="icon" href="${prefix}assets/favicon-32.png" type="image/png"><link rel="apple-touch-icon" href="${prefix}assets/logo-180.png"><link rel="stylesheet" href="${prefix}css/styles.css"></head>
+<link rel="icon" href="${prefix}assets/favicon-32.png?v=logo-20261106" type="image/png"><link rel="apple-touch-icon" href="${prefix}assets/logo-180.png?v=logo-20261106"><link rel="stylesheet" href="${prefix}css/styles.css"></head>
 <body>${header(prefix)}<main class="container page-content">${body}</main>${footer(prefix)}${schema ? `<script type="application/ld+json">${JSON.stringify(schema)}</script>` : ""}</body></html>`;
 }
 
