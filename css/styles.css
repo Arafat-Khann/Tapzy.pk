@@ -52,6 +52,126 @@ html {
   }
 }
 
+/* Keep the product presentation stable when reduced-motion is not enabled. */
+.review-hero {
+  color: var(--white);
+  background: radial-gradient(circle at 85% 20%, #245a91 0, transparent 38%), var(--navy-900);
+}
+
+.review-hero__grid {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.review-hero__copy {
+  min-width: 0;
+}
+
+.review-hero__copy h1 {
+  max-width: 13ch;
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.review-hero__lead {
+  max-width: 55ch;
+  color: #d3e2f1;
+  font-size: 1.1rem;
+}
+
+.review-hero .eyebrow,
+.review-hero .trust-line {
+  color: #b8d5f3;
+}
+
+.review-hero__media {
+  order: -1;
+  width: min(100%, 24rem);
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid #41688e;
+  border-radius: 18px;
+  background: #eaf2fa;
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.2);
+}
+
+.review-hero__media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.offer-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.offer-card {
+  position: relative;
+  min-width: 0;
+  padding: 1.35rem;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface-card);
+}
+
+.offer-card--featured,
+.offer-card--best {
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.offer-card__badge {
+  position: absolute;
+  top: 0;
+  right: 1.35rem;
+  margin: 0;
+  padding: 0.35rem 0.65rem;
+  color: var(--white);
+  background: var(--blue-700);
+  border-radius: 0 0 8px 8px;
+  font-size: 0.78rem;
+}
+
+.offer-card h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.offer-card h3 strong {
+  white-space: nowrap;
+}
+
+@media (min-width: 700px) {
+  .review-hero__grid {
+    grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .offer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 699px) {
+  .review-hero__media {
+    width: min(100%, 19rem);
+  }
+
+  .offer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 body {
   margin: 0;
   min-height: 100vh;
