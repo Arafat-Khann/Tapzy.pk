@@ -23,12 +23,6 @@ function ensureCheckoutModal() {
       <h2 id="checkout-title" data-checkout-title>Complete your order</h2>
       <p class="checkout-modal__intro" data-checkout-intro>Enter your details. Your order is saved securely after you submit it.</p>
       <div class="checkout-summary" data-checkout-summary></div>
-      <div class="checkout-loading" data-checkout-loading hidden role="status" aria-live="polite">
-        <div class="checkout-loading__spinner" aria-hidden="true"></div>
-        <div class="checkout-loading__lines" aria-hidden="true"><span></span><span></span><span></span></div>
-        <strong>Processing your order</strong>
-        <p>Please wait while we securely save your order. Do not close this window.</p>
-      </div>
       <form class="checkout-form" data-checkout-form novalidate>
         <label>Full name<input type="text" name="name" autocomplete="name" maxlength="120" required></label>
         <label>Pakistani phone number<input type="tel" name="phone" autocomplete="tel" placeholder="03XX XXXXXXX" maxlength="20" required></label>
@@ -101,7 +95,6 @@ function openCheckoutModal(items) {
   const modal = document.querySelector("[data-checkout-modal]");
   const form = modal.querySelector("[data-checkout-form]");
   form.reset();
-  modal.querySelector("[data-checkout-loading]").hidden = true;
   modal.querySelector("[data-checkout-summary]").hidden = false;
   modal.querySelector("[data-checkout-intro]").hidden = false;
   form.hidden = false;
@@ -121,18 +114,6 @@ function closeCheckoutModal() {
   modal.hidden = true;
   document.body.classList.remove("checkout-open");
   pendingCheckoutItems = [];
-}
-
-function setCheckoutLoading(modal, isLoading) {
-  const form = modal.querySelector("[data-checkout-form]");
-  const loading = modal.querySelector("[data-checkout-loading]");
-  form.hidden = isLoading;
-  loading.hidden = !isLoading;
-  if (isLoading) {
-    modal.querySelector("[data-checkout-summary]").hidden = true;
-    modal.querySelector("[data-checkout-intro]").hidden = true;
-    modal.querySelector("[data-checkout-title]").textContent = "Processing your order";
-  }
 }
 
 function getCheckoutCustomer(form) {
@@ -189,22 +170,14 @@ async function submitCheckoutForm(modal) {
   form.querySelector("button[type=submit]").disabled = true;
   try {
     if (review) {
-      setCheckoutLoading(modal, true);
       const result = await submitReviewOrder(modal, customer);
-      sessionStorage.setItem("tapzy_order_confirmation", JSON.stringify({
-        ...customer,
-        orderNumber: result.orderNumber,
-        totalAmount: result.totalAmount,
-      }));
-      window.location.assign("/order-confirmation.html");
+      sessionStorage.setItem("tapzy_confirmation_token", result.confirmationToken);
+      window.location.assign("/order-received/");
     } else {
       openWhatsAppCheckout(pendingCheckoutItems, customer);
       closeCheckoutModal();
     }
   } catch (submissionError) {
-    setCheckoutLoading(modal, false);
-    modal.querySelector("[data-checkout-summary]").hidden = false;
-    modal.querySelector("[data-checkout-intro]").hidden = false;
     error.textContent = submissionError.message;
     error.hidden = false;
   } finally {

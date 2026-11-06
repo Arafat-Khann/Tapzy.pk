@@ -16,12 +16,16 @@ create table if not exists public.orders (
   order_status text not null default 'pending' check (order_status in ('pending', 'confirmed', 'processing', 'shipped', 'completed', 'cancelled')),
   total_amount integer not null check (total_amount > 0),
   customer_notes text check (customer_notes is null or char_length(customer_notes) <= 500),
+  confirmation_token text unique,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
 
+alter table public.orders add column if not exists confirmation_token text;
+
 create index if not exists orders_created_at_idx on public.orders (created_at desc);
 create index if not exists orders_status_idx on public.orders (order_status, payment_status);
+create unique index if not exists orders_confirmation_token_idx on public.orders (confirmation_token);
 
 alter table public.orders enable row level security;
 revoke all on public.orders from anon, authenticated;

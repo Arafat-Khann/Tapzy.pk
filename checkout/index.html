@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Your Order | Tapzy</title><meta name="description" content="Enter your details to place your Tapzy order.">
+  <link rel="canonical" href="https://www.tapzypk.me/checkout/"><link rel="icon" href="../assets/favicon-32.png" type="image/png"><link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header class="site-header"><div class="container site-header__inner"><a class="brand" href="../"><span class="logo-circle logo-circle--sm"><img src="../assets/logo.webp" alt="Tapzy logo" width="44" height="44"></span><span class="brand__text"><span class="brand__name">Tapzy</span><span class="brand__tag">NFC Review Cards</span></span></a></div></header>
+  <main class="checkout-page container">
+    <p class="eyebrow">Tapzy checkout</p><h1>Complete Your Order</h1><p class="checkout-page__intro">Enter your details to place your order.</p>
+    <div class="checkout-page__grid"><section class="checkout-page__summary" data-page-summary></section>
+      <form class="checkout-form checkout-page__form" data-page-form novalidate>
+        <label>Full name<input type="text" name="name" autocomplete="name" maxlength="120" required></label>
+        <label>Pakistani phone number<input type="tel" name="phone" autocomplete="tel" placeholder="03XX XXXXXXX" maxlength="20" required></label>
+        <label>City<input type="text" name="city" maxlength="80" required></label>
+        <label>Complete delivery address<textarea name="address" rows="3" maxlength="500" required></textarea></label>
+        <label>Business name <span>(optional)</span><input type="text" name="businessName" maxlength="120"></label>
+        <label>Google Maps URL<input type="url" name="googleReviewUrl" placeholder="https://maps.google.com/..." maxlength="500" required></label>
+        <fieldset class="checkout-payment"><legend>Payment method</legend><label class="checkout-payment__option"><input type="radio" name="paymentMethod" value="cod" required> Cash on Delivery</label><label class="checkout-payment__option"><input type="radio" name="paymentMethod" value="bank_transfer"> Advance Payment</label></fieldset>
+        <p class="checkout-bank-note" data-bank-note hidden>Payment instructions will be shared after your order. Your payment remains pending verification until Tapzy confirms it.</p>
+        <label>Notes <span>(optional)</span><textarea name="notes" rows="2" maxlength="500"></textarea></label>
+        <p class="checkout-form__error" data-page-error hidden></p><button class="btn btn-primary checkout-form__submit" type="submit">Place Order</button>
+      </form>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container site-footer__grid"><div><strong>Tapzy</strong><p>NFC review cards and smart business products.</p></div><div class="site-footer__links"><a href="../terms.html">Terms of Service</a><a href="../privacy.html">Privacy Policy</a><a href="https://wa.me/923375392447">WhatsApp</a></div></div></footer>
+  <script src="../js/checkout-page.js"></script>
+</body>
+</html>

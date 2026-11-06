@@ -1,3 +1,5 @@
+const crypto = require("crypto");
+
 const PACKAGES = {
   single_card: { quantity: 1, total: 2500 },
   business_duo: { quantity: 2, total: 4000 },
@@ -50,13 +52,32 @@ function validate(body) {
     payment_status: paymentMethod === "cod" ? "pending" : "pending_verification",
     order_status: "pending",
     total_amount: PACKAGES[packageId].total,
+    confirmation_token: crypto.randomBytes(32).toString("base64url"),
     customer_notes: text(body.notes, 500) || null,
   };
 }
 
 module.exports = async function handler(req, res) {
+  if (req.method === "GET") {
+    const token = text(req.query?.token, 120);
+    if (!token) return json(res, 400, { error: "A valid order reference is required." });
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!supabaseUrl || !serviceRoleKey) return json(res, 503, { error: "Order service is not configured." });
+    try {
+      const url = `${getSupabaseRestUrl(supabaseUrl).split("?")[0]}?select=order_number,customer_name,phone,city,complete_address,package,quantity,total_amount,payment_method,payment_status&confirmation_token=eq.${encodeURIComponent(token)}`;
+      const response = await fetch(url, { headers: { apikey: serviceRoleKey, Authorization: "Bearer " + serviceRoleKey } });
+      if (!response.ok) return json(res, 502, { error: "Could not retrieve the order." });
+      const rows = await response.json();
+      if (!rows[0]) return json(res, 404, { error: "Order reference is invalid or expired." });
+      return json(res, 200, rows[0]);
+    } catch (error) {
+      console.error("Order confirmation request failed", error);
+      return json(res, 502, { error: "Could not retrieve the order." });
+    }
+  }
   if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
+    res.setHeader("Allow", "GET, POST");
     return json(res, 405, { error: "Method not allowed." });
   }
   let body;
@@ -89,7 +110,7 @@ module.exports = async function handler(req, res) {
     const rows = await response.json();
     const saved = rows[0];
     if (!saved) return json(res, 502, { error: "The order service did not confirm insertion." });
-    return json(res, 201, { orderNumber: saved.order_number, totalAmount: saved.total_amount });
+    return json(res, 201, { orderNumber: saved.order_number, totalAmount: saved.total_amount, confirmationToken: order.confirmation_token });
   } catch (error) {
     console.error("Order service request failed", error);
     return json(res, 502, { error: "We could not connect to the order service. Please try again." });
