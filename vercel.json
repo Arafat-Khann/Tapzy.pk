@@ -1,6 +1,10 @@
 {
   "cleanUrls": true,
   "trailingSlash": true,
+  "rewrites": [
+    { "source": "/products/linkedin-nfc-card/", "destination": "/products/linkedin-nfc-card/index.html" },
+    { "source": "/products/instagram-nfc-card/", "destination": "/products/instagram-nfc-card/index.html" }
+  ],
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/product.html", "has": [{ "type": "query", "key": "id", "value": "google-review-stand" }], "destination": "/google-review-nfc-card/", "permanent": true },
