@@ -1,10 +1,14 @@
-const checkoutPackages = { single_card: { label: "Single Card", quantity: 1, total: 2500 }, business_duo: { label: "Business Duo", quantity: 2, total: 4000 } };
-const packageId = new URLSearchParams(window.location.search).get("package") === "business_duo" ? "business_duo" : "single_card";
+const checkoutPackages = TAPZY_REVIEW_PACKAGES;
+const requestedPackage = new URLSearchParams(window.location.search).get("package");
+const packageId = checkoutPackages[requestedPackage] ? requestedPackage : "single_card";
 const packageInfo = checkoutPackages[packageId];
 const escapeCheckoutPage = (value) => String(value || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c]));
 document.querySelector("[data-page-summary]").innerHTML = `<h2>Order Summary</h2><p><span>${packageInfo.label}</span><strong>PKR ${packageInfo.total.toLocaleString("en-PK")}</strong></p><p>Quantity <strong>${packageInfo.quantity}</strong></p><p class="checkout-summary__total">Total <strong>PKR ${packageInfo.total.toLocaleString("en-PK")}</strong></p>`;
 const pageForm = document.querySelector("[data-page-form]");
 pageForm.querySelectorAll('input[name="paymentMethod"]').forEach((input) => input.addEventListener("change", () => { document.querySelector("[data-bank-note]").hidden = input.value !== "bank_transfer" || !input.checked; }));
+pageForm.querySelectorAll("[data-copy-payment]").forEach((button) => button.addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText(button.dataset.copyPayment); button.textContent = "Copied"; setTimeout(() => { button.textContent = button.dataset.copyPayment; }, 1200); } catch {}
+}));
 pageForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const error = document.querySelector("[data-page-error]");

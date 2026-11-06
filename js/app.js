@@ -309,7 +309,8 @@ function bindCommerceActions() {
 
       const quantity = getRequestedQuantity(buyButton);
       if (isReviewOrder([{ id: product.id, quantity }])) {
-        window.location.assign(`/checkout/?package=${product.id === "google-review-duo" ? "business_duo" : "single_card"}`);
+        const packageId = product.id === "google-review-duo" ? "business_duo" : product.id === "google-review-trio" ? "business_trio" : "single_card";
+        window.location.assign(`/checkout/?package=${packageId}`);
         return;
       }
       startCheckout([

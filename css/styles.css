@@ -17,14 +17,39 @@
   --radius-btn: 10px;
 }
 
+.offer-card--best {
+  border: 2px solid var(--blue-600);
+  box-shadow: 0 12px 28px rgba(26, 57, 135, 0.14);
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+.checkout-bank-note p {
+  margin: 0.45rem 0;
+}
+
+.copy-payment {
+  padding: 0.15rem 0.35rem;
+  color: var(--blue-700);
+  background: transparent;
+  border: 1px solid var(--line);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+@media (max-width: 699px) {
+  .offer-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 body {
@@ -361,6 +386,7 @@ dd {
   }
 
   .review-hero {
+    padding-top: clamp(2rem, 5vw, 4rem);
     color: var(--white);
     background: radial-gradient(circle at 85% 20%, #245a91 0, transparent 38%), var(--navy-900);
   }
@@ -1454,11 +1480,26 @@ body.checkout-open {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 0.35rem;
+  min-height: 2.5rem;
+  margin-top: 0.25rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  line-height: 1.35;
+}
+
+.checkout-payment__option:hover,
+.checkout-payment__option:focus-within {
+  border-color: var(--line);
+  background: var(--surface-card);
 }
 
 .checkout-payment__option input {
+  flex: 0 0 auto;
   width: auto;
+  margin: 0;
+  accent-color: var(--blue-700);
 }
 
 .checkout-form__error {
@@ -1667,6 +1708,69 @@ body.checkout-open {
   @media (max-width: 720px) {
     .checkout-page__grid {
       grid-template-columns: 1fr;
+    }
+
+    /* Product and checkout layout safeguards across the static page breakpoints. */
+    .review-hero {
+      padding-top: clamp(2rem, 5vw, 4rem);
+    }
+
+    .review-hero .eyebrow {
+      font-weight: 600;
+    }
+
+    .review-hero__grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+      padding-block: 3rem;
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .offer-card,
+    .info-card,
+    .comparison-table > div,
+    .steps-grid article {
+      min-width: 0;
+    }
+
+    .offer-card h3 {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.45rem;
+    }
+
+    .offer-card h3 strong {
+      white-space: nowrap;
+    }
+
+    .review-hero__media img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    .site-header + main {
+      min-width: 0;
+    }
+
+    @media (min-width: 700px) {
+      .review-hero__grid {
+        grid-template-columns: 1.05fr 0.95fr;
+        padding-block: 4rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .offer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     .checkout-page__summary {

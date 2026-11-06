@@ -1,9 +1,12 @@
 let pendingCheckoutItems = [];
 
-const REVIEW_PACKAGES = {
-  single_card: { id: "google-review-stand", label: "Single Card", total: 2500 },
-  business_duo: { id: "google-review-duo", label: "Business Duo (2 cards)", total: 4000 },
-};
+const REVIEW_PACKAGES = typeof TAPZY_REVIEW_PACKAGES !== "undefined"
+  ? TAPZY_REVIEW_PACKAGES
+  : {
+      single_card: { id: "google-review-stand", label: "Single Card", quantity: 1, total: 2500 },
+      business_duo: { id: "google-review-duo", label: "Business Duo", quantity: 2, total: 4500 },
+      business_trio: { id: "google-review-trio", label: "Business Trio", quantity: 3, total: 6000 },
+    };
 
 function isReviewOrder(items) {
   return items.length === 1 && Object.values(REVIEW_PACKAGES).some((item) => item.id === items[0].id);
@@ -32,15 +35,16 @@ function ensureCheckoutModal() {
         <fieldset class="checkout-payment" data-review-only>
           <legend>Package</legend>
           <label class="checkout-payment__option"><input type="radio" name="package" value="single_card" checked> Single Card — PKR 2,500</label>
-          <label class="checkout-payment__option"><input type="radio" name="package" value="business_duo"> Business Duo — PKR 4,000 <span>(save PKR 1,000)</span></label>
+          <label class="checkout-payment__option"><input type="radio" name="package" value="business_duo"> Business Duo — PKR 4,500 <span>(save PKR 2,500)</span></label>
+          <label class="checkout-payment__option"><input type="radio" name="package" value="business_trio"> Business Trio — PKR 6,000 <span>(best value)</span></label>
         </fieldset>
         <label data-review-only>Google Maps URL<input type="url" name="googleReviewUrl" placeholder="https://maps.google.com/..." maxlength="500" required></label>
         <fieldset class="checkout-payment">
           <legend>Payment method</legend>
           <label class="checkout-payment__option"><input type="radio" name="paymentMethod" value="cod" required> Cash on Delivery</label>
-          <label class="checkout-payment__option"><input type="radio" name="paymentMethod" value="bank_transfer"> Advance payment / bank transfer</label>
+          <label class="checkout-payment__option"><input type="radio" name="paymentMethod" value="bank_transfer"> Online Payment / Advance Payment</label>
         </fieldset>
-        <p class="checkout-bank-note" data-bank-note hidden>Bank transfer instructions are not configured on this website yet. Tapzy will share verified payment details after receiving your order. Never send payment to an unverified number.</p>
+        <div class="checkout-bank-note" data-bank-note hidden><strong>Online Payment / Advance Payment Details</strong><p>Jazz Cash: <button type="button" class="copy-payment" data-copy-payment="03375392447">03375392447</button> (Arafat Khan)</p><p>UBL Bank: <button type="button" class="copy-payment" data-copy-payment="0230377702433">0230377702433</button> (Arafat Khan)</p><small>Advance payments are subject to verification. Your order will remain pending verification until Tapzy confirms payment.</small></div>
         <label>Notes <span>(optional)</span><textarea name="notes" rows="2" maxlength="500"></textarea></label>
         <p class="checkout-form__error" data-checkout-error hidden></p>
         <button type="submit" class="btn btn-primary checkout-form__submit">Place order</button>
@@ -66,6 +70,7 @@ function bindCheckoutModalEvents(modal) {
     input.addEventListener("change", () => {
       modal.querySelector("[data-bank-note]").hidden = input.value !== "bank_transfer" || !input.checked;
     });
+    modal.querySelectorAll("[data-copy-payment]").forEach((button) => button.addEventListener("click", () => navigator.clipboard?.writeText(button.dataset.copyPayment)));
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !modal.hidden) closeCheckoutModal();
