@@ -11,6 +11,12 @@ function text(value, max) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
 }
 
+function getSupabaseRestUrl(value) {
+  const url = new URL(value);
+  url.pathname = url.pathname.replace(/\/rest\/v1\/?$/, "");
+  return `${url.toString().replace(/\/$/, "")}/rest/v1/orders?select=id,order_number,total_amount`;
+}
+
 function validMapsUrl(value) {
   try {
     const url = new URL(value);
@@ -65,14 +71,20 @@ module.exports = async function handler(req, res) {
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !serviceRoleKey) return json(res, 503, { error: "Order service is not configured yet. Please contact Tapzy on WhatsApp." });
   try {
-    const response = await fetch(`${supabaseUrl.replace(/\/$/, "")}/rest/v1/orders?select=id,order_number,total_amount`, {
+    const response = await fetch(getSupabaseRestUrl(supabaseUrl), {
       method: "POST",
-      headers: { apikey: serviceRoleKey, Authorization: `Bearer ${serviceRoleKey}`, "Content-Type": "application/json", Prefer: "return=representation" },
+      headers: {
+        apikey: serviceRoleKey,
+        Authorization: "Bearer " + serviceRoleKey,
+        "Content-Type": "application/json",
+        Prefer: "return=representation",
+      },
       body: JSON.stringify(order),
     });
     if (!response.ok) {
-      console.error("Supabase order insertion failed", response.status, await response.text());
-      return json(res, 502, { error: "We could not save your order. Please try again." });
+      const errorBody = await response.text();
+      console.error("Supabase order insertion failed", response.status, errorBody);
+      return json(res, 502, { error: "Supabase rejected the order. Check the Supabase URL and database table configuration." });
     }
     const rows = await response.json();
     const saved = rows[0];
