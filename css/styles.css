@@ -2,9 +2,9 @@
   --navy-950: #081420;
   --navy-900: #0c1a2e;
   --navy-800: #132a47;
-  --blue-700: #1a5fb4;
-  --blue-600: #2270cc;
-  --blue-100: #dce8f5;
+  --blue-700: #1a3987;
+  --blue-600: #244ba5;
+  --blue-100: #dfe6f7;
   --surface: #f2f6fb;
   --surface-2: #e6edf6;
   --surface-card: #f8fafd;
@@ -1470,4 +1470,29 @@ body.checkout-open {
 .checkout-form__submit {
   width: 100%;
   margin-top: 0.25rem;
+}
+
+.checkout-form label span,
+.checkout-payment__option span {
+  color: var(--ink-muted);
+  font-size: 0.88em;
+}
+
+.checkout-bank-note {
+  margin: 0;
+  padding: 0.75rem;
+  color: #6b4d00;
+  background: #fff7db;
+  border: 1px solid #e6ca6d;
+  font-size: 0.88rem;
+}
+
+.checkout-confirmation {
+  padding: 1rem;
+  background: var(--surface-card);
+  border: 1px solid var(--blue-600);
+}
+
+.checkout-confirmation h3 {
+  margin-top: 0;
 }
