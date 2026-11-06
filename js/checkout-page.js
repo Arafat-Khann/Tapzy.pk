@@ -4,6 +4,50 @@ const packageInfo = checkoutPackages[packageId];
 const escapeCheckoutPage = (value) => String(value || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c]));
 document.querySelector("[data-page-summary]").innerHTML = `<h2>Order Summary</h2><p><span>${packageInfo.label}</span><strong>PKR ${packageInfo.total.toLocaleString("en-PK")}</strong></p><p>Quantity <strong>${packageInfo.quantity}</strong></p><p class="checkout-summary__total">Total <strong>PKR ${packageInfo.total.toLocaleString("en-PK")}</strong></p>`;
 const pageForm = document.querySelector("[data-page-form]");
+const addressField = pageForm.querySelector('[name="address"]');
+const cityField = pageForm.querySelector('[name="city"]');
+const mapButton = document.querySelector("[data-find-location]");
+const mapStatus = document.querySelector("[data-map-status]");
+let deliveryMap;
+let deliveryMarker;
+
+mapButton.addEventListener("click", async () => {
+  const query = [addressField.value.trim(), cityField.value.trim(), "Pakistan"].filter(Boolean).join(", ");
+  if (!addressField.value.trim() || !cityField.value.trim()) {
+    mapStatus.textContent = "Enter the city and address first.";
+    return;
+  }
+  mapButton.disabled = true;
+  mapStatus.textContent = "Finding this location...";
+  try {
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=pk&q=${encodeURIComponent(query)}`, {
+      headers: { Accept: "application/json" },
+    });
+    if (!response.ok) throw new Error("Location search failed.");
+    const results = await response.json();
+    if (!results.length) throw new Error("We could not find that address. You can still place the order with the typed address.");
+    const location = results[0];
+    if (!deliveryMap) {
+      deliveryMap = L.map(document.querySelector("[data-checkout-map]")).setView([location.lat, location.lon], 15);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors',
+      }).addTo(deliveryMap);
+    } else {
+      deliveryMap.setView([location.lat, location.lon], 15);
+    }
+    if (deliveryMarker) deliveryMarker.setLatLng([location.lat, location.lon]);
+    else deliveryMarker = L.marker([location.lat, location.lon]).addTo(deliveryMap);
+    document.querySelector("[data-checkout-map]").hidden = false;
+    deliveryMap.invalidateSize();
+    mapStatus.textContent = "Location found. Please check the pin; your typed address will be used for delivery.";
+  } catch (error) {
+    mapStatus.textContent = error.message;
+  } finally {
+    mapButton.disabled = false;
+  }
+});
+
 pageForm.querySelectorAll('input[name="paymentMethod"]').forEach((input) => input.addEventListener("change", () => { document.querySelector("[data-bank-note]").hidden = input.value !== "bank_transfer" || !input.checked; }));
 pageForm.addEventListener("submit", async (event) => {
   event.preventDefault();

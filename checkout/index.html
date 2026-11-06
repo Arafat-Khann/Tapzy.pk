@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Complete Your Order | Tapzy</title><meta name="description" content="Enter your details to place your Tapzy order.">
-  <link rel="canonical" href="https://www.tapzypk.me/checkout/"><link rel="icon" href="../assets/favicon-32.png" type="image/png"><link rel="stylesheet" href="../css/styles.css">
+  <link rel="canonical" href="https://www.tapzypk.me/checkout/"><link rel="icon" href="../assets/favicon-32.png" type="image/png"><link rel="stylesheet" href="../css/styles.css"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
   <header class="site-header"><div class="container site-header__inner"><a class="brand" href="../"><span class="logo-circle logo-circle--sm"><img src="../assets/logo.webp" alt="Tapzy logo" width="44" height="44"></span><span class="brand__text"><span class="brand__name">Tapzy</span><span class="brand__tag">NFC Review Cards</span></span></a></div></header>
@@ -15,6 +15,11 @@
         <label>Pakistani phone number<input type="tel" name="phone" autocomplete="tel" placeholder="03XX XXXXXXX" maxlength="20" required></label>
         <label>City<input type="text" name="city" maxlength="80" required></label>
         <label>Complete delivery address<textarea name="address" rows="3" maxlength="500" required></textarea></label>
+        <div class="checkout-map-tools">
+          <button class="btn btn-secondary" type="button" data-find-location>Show location on map</button>
+          <p class="checkout-map-status" data-map-status aria-live="polite"></p>
+        </div>
+        <div class="checkout-map" data-checkout-map hidden aria-label="Delivery location map"></div>
         <label>Business name <span>(optional)</span><input type="text" name="businessName" maxlength="120"></label>
         <label>Google Maps URL<input type="url" name="googleReviewUrl" placeholder="https://maps.google.com/..." maxlength="500" required></label>
         <fieldset class="checkout-payment"><legend>Payment method</legend><label class="checkout-payment__option"><input type="radio" name="paymentMethod" value="cod" required> Cash on Delivery</label><label class="checkout-payment__option"><input type="radio" name="paymentMethod" value="bank_transfer"> Advance Payment</label></fieldset>
@@ -25,6 +30,6 @@
     </div>
   </main>
   <footer class="site-footer"><div class="container site-footer__grid"><div><strong>Tapzy</strong><p>NFC review cards and smart business products.</p></div><div class="site-footer__links"><a href="../terms.html">Terms of Service</a><a href="../privacy.html">Privacy Policy</a><a href="https://wa.me/923375392447">WhatsApp</a></div></div></footer>
-  <script src="../js/checkout-page.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="../js/checkout-page.js"></script>
 </body>
 </html>
