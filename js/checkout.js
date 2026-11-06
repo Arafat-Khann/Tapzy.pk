@@ -35,7 +35,7 @@ function ensureCheckoutModal() {
           <label class="checkout-payment__option"><input type="radio" name="package" value="single_card" checked> Single Card — PKR 2,500</label>
           <label class="checkout-payment__option"><input type="radio" name="package" value="business_duo"> Business Duo — PKR 4,000 <span>(save PKR 1,000)</span></label>
         </fieldset>
-        <label data-review-only>Google review URL<input type="url" name="googleReviewUrl" placeholder="https://g.page/..." maxlength="500" required></label>
+        <label data-review-only>Google Maps URL<input type="url" name="googleReviewUrl" placeholder="https://maps.google.com/..." maxlength="500" required></label>
         <fieldset class="checkout-payment">
           <legend>Payment method</legend>
           <label class="checkout-payment__option"><input type="radio" name="paymentMethod" value="cod" required> Cash on Delivery</label>
@@ -136,7 +136,7 @@ function getCheckoutCustomer(form) {
 function validateCheckoutCustomer(customer, review) {
   if (!customer.name || !customer.city || !customer.address || !customer.phone) return "Please complete your name, phone, city, and address.";
   if (!/^(\+92|0092|92|0)3\d{9}$/.test(customer.phone.replace(/[\s-]/g, ""))) return "Please enter a valid Pakistani mobile number.";
-  if (review && !customer.googleReviewUrl) return "Please enter your Google review URL.";
+  if (review && !customer.googleReviewUrl) return "Please enter your Google Maps URL.";
   if (!customer.paymentMethod) return "Please select a payment method.";
   return "";
 }

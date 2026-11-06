@@ -11,13 +11,10 @@ function text(value, max) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
 }
 
-function validReviewUrl(value) {
+function validMapsUrl(value) {
   try {
     const url = new URL(value);
-    const host = url.hostname.toLowerCase();
-    const isGoogleHost = host === "google.com" || host.endsWith(".google.com") || /^google\.[a-z.]+$/.test(host);
-    const isShortLink = host === "g.page" || host === "goo.gl" || host === "maps.app.goo.gl";
-    return url.protocol === "https:" && (isGoogleHost || isShortLink);
+    return url.protocol === "https:" || url.protocol === "http:";
   } catch {
     return false;
   }
@@ -32,8 +29,8 @@ function validate(body) {
   if (!["cod", "bank_transfer"].includes(paymentMethod)) return "Please select a supported payment method.";
   if (!/^(?:\+92|0092|92|0)3\d{9}$/.test(phone)) return "Please enter a valid Pakistani mobile number.";
   if (!text(body.name, 120) || !text(body.city, 80) || !text(body.address, 500)) return "Name, city, and complete address are required.";
-  const reviewUrl = text(body.googleReviewUrl, 500);
-  if (!validReviewUrl(reviewUrl)) return "Please enter a valid HTTPS Google review URL.";
+  const mapsUrl = text(body.googleReviewUrl, 500);
+  if (!validMapsUrl(mapsUrl)) return "Please enter a valid Google Maps URL.";
   return {
     customer_name: text(body.name, 120),
     phone,
@@ -42,7 +39,7 @@ function validate(body) {
     business_name: text(body.businessName, 120) || null,
     package: packageId,
     quantity: PACKAGES[packageId].quantity,
-    google_review_url: reviewUrl,
+    google_review_url: mapsUrl,
     payment_method: paymentMethod,
     payment_status: paymentMethod === "cod" ? "pending" : "pending_verification",
     order_status: "pending",
