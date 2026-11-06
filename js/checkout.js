@@ -20,9 +20,15 @@ function ensureCheckoutModal() {
     <div class="checkout-modal__backdrop" data-close-checkout></div>
     <div class="checkout-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
       <button type="button" class="checkout-modal__close" data-close-checkout aria-label="Close checkout form">&times;</button>
-      <h2 id="checkout-title">Complete your order</h2>
+      <h2 id="checkout-title" data-checkout-title>Complete your order</h2>
       <p class="checkout-modal__intro" data-checkout-intro>Enter your details. Your order is saved securely after you submit it.</p>
       <div class="checkout-summary" data-checkout-summary></div>
+      <div class="checkout-loading" data-checkout-loading hidden role="status" aria-live="polite">
+        <div class="checkout-loading__spinner" aria-hidden="true"></div>
+        <div class="checkout-loading__lines" aria-hidden="true"><span></span><span></span><span></span></div>
+        <strong>Processing your order</strong>
+        <p>Please wait while we securely save your order. Do not close this window.</p>
+      </div>
       <div class="checkout-confirmation" data-checkout-confirmation hidden></div>
       <form class="checkout-form" data-checkout-form novalidate>
         <label>Full name<input type="text" name="name" autocomplete="name" maxlength="120" required></label>
@@ -97,6 +103,8 @@ function openCheckoutModal(items) {
   const form = modal.querySelector("[data-checkout-form]");
   form.reset();
   modal.querySelector("[data-checkout-confirmation]").hidden = true;
+  modal.querySelector("[data-checkout-loading]").hidden = true;
+  modal.querySelector("[data-checkout-title]").textContent = "Complete your order";
   modal.querySelector("[data-checkout-summary]").hidden = false;
   modal.querySelector("[data-checkout-intro]").hidden = false;
   form.hidden = false;
@@ -116,6 +124,18 @@ function closeCheckoutModal() {
   modal.hidden = true;
   document.body.classList.remove("checkout-open");
   pendingCheckoutItems = [];
+}
+
+function setCheckoutLoading(modal, isLoading) {
+  const form = modal.querySelector("[data-checkout-form]");
+  const loading = modal.querySelector("[data-checkout-loading]");
+  form.hidden = isLoading;
+  loading.hidden = !isLoading;
+  if (isLoading) {
+    modal.querySelector("[data-checkout-summary]").hidden = true;
+    modal.querySelector("[data-checkout-intro]").hidden = true;
+    modal.querySelector("[data-checkout-title]").textContent = "Processing your order";
+  }
 }
 
 function getCheckoutCustomer(form) {
@@ -153,12 +173,40 @@ async function submitReviewOrder(modal, customer) {
 }
 
 function showConfirmation(modal, customer, result) {
+  setCheckoutLoading(modal, false);
   modal.querySelector("[data-checkout-summary]").hidden = true;
   modal.querySelector("[data-checkout-intro]").hidden = true;
-  modal.querySelector("[data-checkout-form]").hidden = true;
+  modal.querySelector("[data-checkout-title]").textContent = "Order confirmed";
   const confirmation = modal.querySelector("[data-checkout-confirmation]");
   confirmation.hidden = false;
-  confirmation.innerHTML = `<h3>Order received</h3><p>Your order number is <strong>${result.orderNumber}</strong>.</p><p>${REVIEW_PACKAGES[customer.packageId].label} · <strong>${formatPkr(result.totalAmount)}</strong></p><p>Payment: ${customer.paymentMethod === "cod" ? "Cash on Delivery (pending)" : "Advance payment (pending verification)"}. Tapzy will contact you to confirm the review link and next step.</p><button type="button" class="btn btn-secondary" data-close-checkout>Close</button>`;
+  const packageDetails = REVIEW_PACKAGES[customer.packageId];
+  const paymentLabel = customer.paymentMethod === "cod"
+    ? "Cash on Delivery · Pending confirmation"
+    : "Advance payment · Pending verification";
+  confirmation.innerHTML = `
+    <div class="checkout-confirmation__mark" aria-hidden="true">✓</div>
+    <p class="eyebrow">Thank you, ${escapeCheckoutText(customer.name)}</p>
+    <h3>Order received</h3>
+    <p class="checkout-confirmation__lead">Your order has been securely submitted. We will confirm the details with you on WhatsApp.</p>
+    <div class="checkout-confirmation__number"><span>Order number</span><strong>${escapeCheckoutText(result.orderNumber)}</strong></div>
+    <dl class="checkout-confirmation__details">
+      <div><dt>Package</dt><dd>${escapeCheckoutText(packageDetails.label)}</dd></div>
+      <div><dt>Total</dt><dd>${formatPkr(result.totalAmount)}</dd></div>
+      <div><dt>Delivery location</dt><dd>${escapeCheckoutText(customer.city)}<br>${escapeCheckoutText(customer.address)}</dd></div>
+      <div><dt>Payment</dt><dd>${paymentLabel}</dd></div>
+    </dl>
+    <div class="checkout-confirmation__next"><strong>What happens next?</strong><p>Our team will message you on WhatsApp at <strong>${escapeCheckoutText(customer.phone)}</strong> to confirm your order, Google Maps URL, delivery address, and dispatch details.</p></div>
+    <button type="button" class="btn btn-primary" data-close-checkout>Done</button>`;
+}
+
+function escapeCheckoutText(value) {
+  return String(value).replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  }[character]));
 }
 
 async function submitCheckoutForm(modal) {
@@ -181,6 +229,7 @@ async function submitCheckoutForm(modal) {
   form.querySelector("button[type=submit]").disabled = true;
   try {
     if (review) {
+      setCheckoutLoading(modal, true);
       const result = await submitReviewOrder(modal, customer);
       showConfirmation(modal, customer, result);
     } else {
@@ -188,6 +237,9 @@ async function submitCheckoutForm(modal) {
       closeCheckoutModal();
     }
   } catch (submissionError) {
+    setCheckoutLoading(modal, false);
+    modal.querySelector("[data-checkout-summary]").hidden = false;
+    modal.querySelector("[data-checkout-intro]").hidden = false;
     error.textContent = submissionError.message;
     error.hidden = false;
   } finally {
