@@ -308,8 +308,8 @@ function bindCommerceActions() {
       if (!product) return;
 
       const quantity = getRequestedQuantity(buyButton);
-      if (isReviewOrder([{ id: product.id, quantity }])) {
-        const packageId = product.id === "google-review-duo" ? "business_duo" : product.id === "google-review-trio" ? "business_trio" : "single_card";
+      if (isReviewOrder([{ id: product.id, quantity }]) || product.checkoutPackage) {
+        const packageId = product.checkoutPackage || (product.id === "google-review-duo" ? "business_duo" : product.id === "google-review-trio" ? "business_trio" : "single_card");
         window.location.assign(`/checkout/?package=${packageId}`);
         return;
       }

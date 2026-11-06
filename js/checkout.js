@@ -9,7 +9,11 @@ const REVIEW_PACKAGES = typeof TAPZY_REVIEW_PACKAGES !== "undefined"
     };
 
 function isReviewOrder(items) {
-  return items.length === 1 && Object.values(REVIEW_PACKAGES).some((item) => item.id === items[0].id);
+  return items.length === 1 && ["google-review-stand", "google-review-duo", "google-review-trio"].includes(items[0].id);
+}
+
+function isSupabaseCheckoutOrder(items) {
+  return items.length === 1 && Boolean(getProductById(items[0].id)?.checkoutPackage);
 }
 
 function ensureCheckoutModal() {
@@ -174,7 +178,8 @@ async function submitCheckoutForm(modal) {
   error.hidden = true;
   form.querySelector("button[type=submit]").disabled = true;
   try {
-    if (review) {
+    if (review || isSupabaseCheckoutOrder(pendingCheckoutItems)) {
+      if (!review) customer.packageId = getProductById(pendingCheckoutItems[0].id).checkoutPackage;
       const result = await submitReviewOrder(modal, customer);
       sessionStorage.setItem("tapzy_confirmation_token", result.confirmationToken);
       window.location.assign("/order-received/");

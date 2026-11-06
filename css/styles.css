@@ -28,6 +28,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .checkout-bank-note p {
   margin: 0.45rem 0;
 }
@@ -1345,15 +1349,19 @@ dd {
   box-shadow: 0 4px 14px rgba(12, 26, 46, 0.08);
 }
 
-.hero .btn-secondary {
+.hero .btn-secondary,
+.review-hero .btn-secondary {
+  background: var(--white);
   color: var(--white);
-  border-color: #4a6a8f;
+  color: var(--navy-900);
+  border-color: var(--white);
 }
 
-.hero .btn-secondary:hover {
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: #6b88ab;
+.hero .btn-secondary:hover,
+.review-hero .btn-secondary:hover {
+  color: var(--navy-900);
+  background: var(--white);
+  border-color: var(--white);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
 

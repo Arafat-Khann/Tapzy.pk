@@ -25,6 +25,7 @@ const PRODUCTS = [
     materials: "Acrylic",
     compatibility:
       "iOS / Android (compatible with all NFC-enabled smartphones and any device with a standard camera for QR code scanning)",
+    checkoutPackage: "single_card",
   },
   {
     id: "google-review-duo",
@@ -121,6 +122,7 @@ const PRODUCTS = [
     materials: "PVC",
     compatibility:
       "iOS / Android (compatible with all NFC-enabled smartphones and standard device cameras for QR code scanning)",
+    checkoutPackage: "linkedin_card",
   },
   {
     id: "instagram-card",
@@ -141,6 +143,7 @@ const PRODUCTS = [
     materials: "PVC",
     compatibility:
       "iOS / Android (compatible with all NFC-enabled smartphones and standard device cameras for QR code scanning)",
+    checkoutPackage: "instagram_card",
   },
 ];
 function getProductById(id) {

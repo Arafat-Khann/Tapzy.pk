@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const order = await response.json();
     if (!response.ok) throw new Error(order.error);
     document.querySelector("[data-order-number]").textContent = safeOrderText(order.order_number);
-    document.querySelector("[data-order-package]").textContent = order.package === "business_duo" ? "Business Duo" : order.package === "business_trio" ? "Business Trio" : "Single Card";
+    const packageLabels = { business_duo: "Business Duo", business_trio: "Business Trio", linkedin_card: "LinkedIn NFC Card", instagram_card: "Instagram NFC Card", single_card: "Single Card" };
+    document.querySelector("[data-order-package]").textContent = packageLabels[order.package] || "Tapzy Card";
     document.querySelector("[data-order-quantity]").textContent = order.quantity;
     document.querySelector("[data-order-total]").textContent = `PKR ${Number(order.total_amount).toLocaleString("en-PK")}`;
     document.querySelector("[data-order-payment]").textContent = order.payment_method === "cod" ? "Cash on Delivery" : "Advance Payment";

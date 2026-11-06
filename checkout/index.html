@@ -16,7 +16,7 @@
         <label>City<input type="text" name="city" maxlength="80" required></label>
         <label>Complete delivery address<textarea name="address" rows="3" maxlength="500" required></textarea></label>
         <label>Business name <span>(optional)</span><input type="text" name="businessName" maxlength="120"></label>
-        <label>Google Maps URL<input type="url" name="googleReviewUrl" placeholder="https://maps.google.com/..." maxlength="500" required></label>
+        <label data-google-url-field>Google Maps URL<input type="url" name="googleReviewUrl" placeholder="https://maps.google.com/..." maxlength="500"></label>
         <fieldset class="checkout-payment"><legend>Payment method</legend><label class="checkout-payment__option"><input type="radio" name="paymentMethod" value="cod" required><span>Cash on Delivery</span></label><label class="checkout-payment__option"><input type="radio" name="paymentMethod" value="bank_transfer"><span>Online Payment / Advance Payment</span></label></fieldset>
         <div class="checkout-bank-note" data-bank-note hidden><strong>Online Payment / Advance Payment Details</strong><p>Jazz Cash: <button type="button" class="copy-payment" data-copy-payment="03375392447">03375392447</button> (Arafat Khan)</p><p>UBL Bank: <button type="button" class="copy-payment" data-copy-payment="0230377702433">0230377702433</button> (Arafat Khan)</p><small>Advance payments are subject to verification and are not marked as paid automatically.</small></div>
         <label>Notes <span>(optional)</span><textarea name="notes" rows="2" maxlength="500"></textarea></label>

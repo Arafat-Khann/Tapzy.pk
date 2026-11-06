@@ -4,6 +4,8 @@ const PACKAGES = {
   single_card: { quantity: 1, total: 2500 },
   business_duo: { quantity: 2, total: 4500 },
   business_trio: { quantity: 3, total: 6000 },
+  linkedin_card: { quantity: 1, total: 1500 },
+  instagram_card: { quantity: 1, total: 1500 },
 };
 
 function json(res, status, body) {
@@ -39,7 +41,7 @@ function validate(body) {
   if (!/^(?:\+92|0092|92|0)3\d{9}$/.test(phone)) return "Please enter a valid Pakistani mobile number.";
   if (!text(body.name, 120) || !text(body.city, 80) || !text(body.address, 500)) return "Name, city, and complete address are required.";
   const mapsUrl = text(body.googleReviewUrl, 500);
-  if (!validMapsUrl(mapsUrl)) return "Please enter a valid Google Maps URL.";
+  if (["single_card", "business_duo", "business_trio"].includes(packageId) && !validMapsUrl(mapsUrl)) return "Please enter a valid Google Maps URL.";
   return {
     customer_name: text(body.name, 120),
     phone,
@@ -48,7 +50,7 @@ function validate(body) {
     business_name: text(body.businessName, 120) || null,
     package: packageId,
     quantity: PACKAGES[packageId].quantity,
-    google_review_url: mapsUrl,
+    google_review_url: mapsUrl || null,
     payment_method: paymentMethod,
     payment_status: paymentMethod === "cod" ? "pending" : "pending_verification",
     order_status: "pending",
