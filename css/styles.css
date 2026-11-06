@@ -1213,6 +1213,33 @@ dd {
   color: var(--blue-700);
 }
 
+.product-card__bundle-prices {
+  display: grid;
+  gap: 0.35rem;
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.product-card__bundle-prices p {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.product-card__bundle-prices strong {
+  text-align: right;
+}
+
+.product-card__bundle-prices del {
+  color: var(--ink-muted);
+  font-weight: 400;
+}
+
 .product-card__pricing__note,
 .product-detail__pricing__note {
   margin: 0.35rem 0 0;
