@@ -641,13 +641,13 @@ dd {
 }
 
 .logo-circle--sm {
-  width: 30px;
-  height: 30px;
+  width: 44px;
+  height: 44px;
 }
 
 .logo-circle--lg {
-  width: 88px;
-  height: 88px;
+  width: 132px;
+  height: 132px;
   border-width: 2px;
 }
 
@@ -655,6 +655,7 @@ dd {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  padding: 0.3rem;
 }
 
 .brand__name {
@@ -756,8 +757,8 @@ dd {
 }
 
 .hero__logo.logo-circle--lg {
-  width: 60px;
-  height: 60px;
+  width: 88px;
+  height: 88px;
 }
 
 .hero__headline {
@@ -1729,8 +1730,8 @@ dd {
   }
 
   .hero__logo.logo-circle--lg {
-    width: 88px;
-    height: 88px;
+    width: 132px;
+    height: 132px;
     grid-column: 1;
     grid-row: 1 / 4;
     align-self: center;
