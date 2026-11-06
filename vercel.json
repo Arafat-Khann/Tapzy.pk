@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "rewrites": [
+    { "source": "/cart/", "destination": "/cart.html" },
     { "source": "/products/linkedin-nfc-card/", "destination": "/products/linkedin-nfc-card/index.html" },
     { "source": "/products/instagram-nfc-card/", "destination": "/products/instagram-nfc-card/index.html" }
   ],
