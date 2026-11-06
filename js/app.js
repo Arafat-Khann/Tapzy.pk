@@ -7,6 +7,14 @@ function setCartBadge() {
   badge.hidden = count === 0;
 }
 
+function getAssetUrl(assetPath) {
+  if (!assetPath) return "";
+  if (/^(?:[a-z]+:)?\/\//i.test(assetPath) || assetPath.startsWith("/")) {
+    return assetPath;
+  }
+  return `/${assetPath}`;
+}
+
 function getCheckoutUrl(packageId) {
   const query = `?package=${encodeURIComponent(packageId)}`;
   if (window.location.protocol !== "file:") {
@@ -214,7 +222,7 @@ function renderCartPage() {
       const row = document.createElement("article");
       row.className = "cart-item";
       row.innerHTML = `
-        <img src="${item.image}" alt="" width="96" height="96">
+        <img src="${getAssetUrl(item.image)}" alt="" width="96" height="96">
         <div class="cart-item__main">
           <h2>${item.title}</h2>
           <p>${formatPkr(line.unitPrice)} each${line.rateNote ? ` · ${line.rateNote}` : ""}</p>
