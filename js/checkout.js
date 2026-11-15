@@ -3,9 +3,9 @@ let pendingCheckoutItems = [];
 const REVIEW_PACKAGES = typeof TAPZY_REVIEW_PACKAGES !== "undefined"
   ? TAPZY_REVIEW_PACKAGES
   : {
-      single_card: { id: "google-review-stand", label: "Single Card", quantity: 1, total: 2500 },
-      business_duo: { id: "google-review-duo", label: "Business Duo", quantity: 2, total: 4500 },
-      business_trio: { id: "google-review-trio", label: "Business Trio", quantity: 3, total: 6000 },
+      single_card: { id: "google-review-stand", label: "Single Card", quantity: 1, total: 2000 },
+      business_duo: { id: "google-review-duo", label: "Business Duo", quantity: 2, total: 3500 },
+      business_trio: { id: "google-review-trio", label: "Business Trio", quantity: 3, total: 5000 },
     };
 
 function isReviewOrder(items) {
@@ -38,9 +38,9 @@ function ensureCheckoutModal() {
         <label>Business name <span>(optional)</span><input type="text" name="businessName" maxlength="120"></label>
         <fieldset class="checkout-payment" data-review-only>
           <legend>Package</legend>
-          <label class="checkout-payment__option"><input type="radio" name="package" value="single_card" checked> Single Card — PKR 2,500</label>
-          <label class="checkout-payment__option"><input type="radio" name="package" value="business_duo"> Business Duo — PKR 4,500 <span>(save PKR 2,500)</span></label>
-          <label class="checkout-payment__option"><input type="radio" name="package" value="business_trio"> Business Trio — PKR 6,000 <span>(best value)</span></label>
+          <label class="checkout-payment__option"><input type="radio" name="package" value="single_card" checked> Single Card — PKR 2,000</label>
+          <label class="checkout-payment__option"><input type="radio" name="package" value="business_duo"> Business Duo — PKR 3,500 <span>(save PKR 500)</span></label>
+          <label class="checkout-payment__option"><input type="radio" name="package" value="business_trio"> Business Trio — PKR 5,000 <span>(best value)</span></label>
         </fieldset>
         <label data-review-only>Google Maps URL<input type="url" name="googleReviewUrl" placeholder="https://maps.google.com/..." maxlength="500" required></label>
         <fieldset class="checkout-payment">

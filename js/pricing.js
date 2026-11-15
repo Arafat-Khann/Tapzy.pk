@@ -33,21 +33,21 @@ function calculateLineItem(productId, quantity) {
       break;
 
     case "google-review-stand":
-      unitPrice = 2500;
+      unitPrice = 2000;
       lineTotal = qty * unitPrice;
-      rateNote = "Single-card price: PKR 2,500";
+      rateNote = "Single-card price: PKR 2,000";
       break;
 
     case "google-review-duo":
-      unitPrice = 4500;
+      unitPrice = 3500;
       lineTotal = qty * unitPrice;
-      rateNote = "Business Duo: two cards for PKR 4,500";
+      rateNote = "Business Duo: two cards for PKR 3,500";
       break;
 
     case "google-review-trio":
-      unitPrice = 6000;
+      unitPrice = 5000;
       lineTotal = qty * unitPrice;
-      rateNote = "Business Trio: three cards for PKR 6,000";
+      rateNote = "Business Trio: three cards for PKR 5,000";
       break;
 
     default:

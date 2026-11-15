@@ -1,9 +1,9 @@
 const crypto = require("crypto");
 
 const PACKAGES = {
-  single_card: { quantity: 1, total: 2500 },
-  business_duo: { quantity: 2, total: 4500 },
-  business_trio: { quantity: 3, total: 6000 },
+  single_card: { quantity: 1, total: 2000 },
+  business_duo: { quantity: 2, total: 3500 },
+  business_trio: { quantity: 3, total: 5000 },
   linkedin_card: { quantity: 1, total: 1500 },
   instagram_card: { quantity: 1, total: 1500 },
 };
