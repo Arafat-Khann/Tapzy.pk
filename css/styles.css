@@ -824,6 +824,10 @@ dd {
   color: #0055ff;
 }
 
+.eyebrow--dark {
+  color: #000000;
+}
+
 .hero__headline .eyebrow {
   color: #ffffff;
 }
