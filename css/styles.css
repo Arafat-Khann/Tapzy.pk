@@ -35,14 +35,15 @@
 }
 
 .announcement-bar__track {
-  display: flex;
-  width: max-content;
-  animation: announcement-scroll 22s linear infinite;
+  width: 100%;
+  overflow: hidden;
 }
 
 .announcement-bar__track > span {
-  flex: 0 0 auto;
-  padding-inline: 2rem;
+  display: block;
+  width: max-content;
+  padding-inline: 1rem;
+  animation: announcement-scroll 16s linear infinite;
 }
 
 .announcement-bar b {
@@ -52,20 +53,20 @@
 }
 
 @keyframes announcement-scroll {
+  from {
+    transform: translateX(100vw);
+  }
+
   to {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .announcement-bar__track {
+  .announcement-bar__track > span {
     animation: none;
-    justify-content: center;
     width: 100%;
-  }
-
-  .announcement-bar__track > span[aria-hidden="true"] {
-    display: none;
+    text-align: center;
   }
 }
 
