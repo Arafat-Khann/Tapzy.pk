@@ -40,7 +40,16 @@
           <p class="review-hero__lead">One professional countertop card gives your customers two simple ways to open your Google review link: tap with NFC or scan the printed QR code.</p>
           <div class="hero__actions"><a class="btn btn-primary" href="#buy">Choose your card</a><a class="btn btn-secondary" href="#how-it-works">See how it works</a></div>
         </div>
-        <div class="review-hero__media"><picture><source srcset="../product-images/google-review-stand.webp" type="image/webp"><img src="../product-images/google-review-stand.jpg" alt="Tapzy acrylic Google Review NFC Card with QR code" width="1000" height="1000" fetchpriority="high"></picture></div>
+        <div class="review-hero__media review-hero__carousel" data-product-carousel>
+          <div class="review-hero__carousel-track" data-carousel-track tabindex="0" aria-label="Product images">
+            <figure class="review-hero__carousel-slide" id="product-image-1"><img src="../real-product/IMG_1.webp" alt="Tapzy Google Review NFC Card product photo 1" width="1169" height="1461" fetchpriority="high"></figure>
+            <figure class="review-hero__carousel-slide" id="product-image-2"><img src="../real-product/IMG_2.webp" alt="Tapzy Google Review NFC Card product photo 2" width="1170" height="1462" loading="lazy"></figure>
+            <figure class="review-hero__carousel-slide" id="product-image-3"><img src="../real-product/IMG_3.webp" alt="Tapzy Google Review NFC Card product photo 3" width="1170" height="1462" loading="lazy"></figure>
+          </div>
+          <button class="review-hero__carousel-button review-hero__carousel-button--prev" type="button" data-carousel-prev aria-label="Previous product image">&#8249;</button>
+          <button class="review-hero__carousel-button review-hero__carousel-button--next" type="button" data-carousel-next aria-label="Next product image">&#8250;</button>
+          <div class="review-hero__carousel-dots" aria-label="Choose product image"><button type="button" data-carousel-dot="0" aria-label="Show product image 1" aria-current="true"></button><button type="button" data-carousel-dot="1" aria-label="Show product image 2"></button><button type="button" data-carousel-dot="2" aria-label="Show product image 3"></button></div>
+        </div>
       </div>
     </section>
 
@@ -76,6 +85,6 @@
     {"@context":"https://schema.org","@type":"Product","name":"Tapzy Google Review NFC Card","description":"Acrylic card with NFC and a printed QR code for opening a business's configured Google review link.","image":"https://www.tapzypk.me/product-images/google-review-stand.jpg","brand":{"@type":"Brand","name":"Tapzy"},"offers":[{"@type":"Offer","name":"Single Card","priceCurrency":"PKR","price":"2500","availability":"https://schema.org/InStock","url":"https://www.tapzypk.me/google-review-nfc-card/"},{"@type":"Offer","name":"Business Duo","priceCurrency":"PKR","price":"4500","availability":"https://schema.org/InStock","url":"https://www.tapzypk.me/google-review-nfc-card/"},{"@type":"Offer","name":"Business Trio","priceCurrency":"PKR","price":"6000","availability":"https://schema.org/InStock","url":"https://www.tapzypk.me/google-review-nfc-card/"}]}
   </script>
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
-  <script src="../js/review-packages.js?v=buttons-20261106"></script><script src="../js/products.js?v=buttons-20261106"></script><script src="../js/pricing.js?v=buttons-20261106"></script><script src="../js/cart.js?v=buttons-20261106"></script><script src="../js/checkout.js?v=buttons-20261106"></script><script src="../js/app.js?v=buttons-20261106"></script>
+  <script src="../js/review-packages.js?v=buttons-20261106"></script><script src="../js/products.js?v=buttons-20261106"></script><script src="../js/pricing.js?v=buttons-20261106"></script><script src="../js/cart.js?v=buttons-20261106"></script><script src="../js/checkout.js?v=buttons-20261106"></script><script src="../js/app.js?v=buttons-20261106"></script><script src="../js/product-carousel.js?v=carousel-20261115"></script>
 </body>
 </html>

@@ -76,6 +76,89 @@
   object-fit: cover;
 }
 
+.review-hero__carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.review-hero__carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+}
+
+.review-hero__carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.review-hero__carousel-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.review-hero__carousel .review-hero__carousel-slide img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1.25;
+  object-fit: contain;
+}
+
+.review-hero__carousel-button {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: grid;
+  width: 2.2rem;
+  height: 2.2rem;
+  place-items: center;
+  padding: 0;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 1.7rem;
+  line-height: 1;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.review-hero__carousel-button--prev {
+  left: 0.75rem;
+}
+
+.review-hero__carousel-button--next {
+  right: 0.75rem;
+}
+
+.review-hero__carousel-dots {
+  position: absolute;
+  right: 0;
+  bottom: 0.75rem;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.review-hero__carousel-dots button {
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--blue-700);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.review-hero__carousel-dots button[aria-current="true"] {
+  background: var(--blue-700);
+}
+
 @keyframes announcement-scroll {
   from {
     transform: translateX(0);
