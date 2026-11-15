@@ -31,6 +31,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   line-height: 1.5;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   white-space: nowrap;
 }
 
@@ -43,7 +44,8 @@
   display: block;
   width: max-content;
   padding-inline: 1rem;
-  animation: announcement-scroll 16s linear infinite;
+  animation: announcement-scroll 12s linear infinite;
+  will-change: transform;
 }
 
 .announcement-bar b {
