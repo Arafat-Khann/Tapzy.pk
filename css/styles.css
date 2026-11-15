@@ -52,6 +52,28 @@
   font-weight: 400;
 }
 
+.results-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.results-gallery figure {
+  min-width: 0;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-card);
+}
+
+.results-gallery img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
 @keyframes announcement-scroll {
   from {
     transform: translateX(0);
@@ -218,6 +240,10 @@ body {
   .announcement-bar {
     font-size: 0.65rem;
     letter-spacing: 0.04em;
+  }
+
+  .results-gallery {
+    grid-template-columns: 1fr;
   }
 
   .review-hero__grid {
