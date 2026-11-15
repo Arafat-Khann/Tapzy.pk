@@ -23,18 +23,50 @@
 }
 
 .announcement-bar {
-  padding: 0.55rem 1rem;
+  overflow: hidden;
+  padding: 0.45rem 0;
   color: var(--white);
-  background: var(--blue-600);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 1.4;
-  text-align: center;
+  background: linear-gradient(90deg, var(--blue-700), var(--blue-600), var(--blue-700));
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  white-space: nowrap;
 }
 
-.announcement-bar span {
-  margin-inline: 0.45rem;
+.announcement-bar__track {
+  display: flex;
+  width: max-content;
+  animation: announcement-scroll 22s linear infinite;
+}
+
+.announcement-bar__track > span {
+  flex: 0 0 auto;
+  padding-inline: 2rem;
+}
+
+.announcement-bar b {
+  margin-inline: 1.25rem;
+  color: #b8d5f3;
+  font-weight: 400;
+}
+
+@keyframes announcement-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-bar__track {
+    animation: none;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .announcement-bar__track > span[aria-hidden="true"] {
+    display: none;
+  }
 }
 
 *,
@@ -185,7 +217,7 @@ body {
 
 @media (max-width: 699px) {
   .announcement-bar {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     letter-spacing: 0.04em;
   }
 
