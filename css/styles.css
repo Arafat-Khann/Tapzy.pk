@@ -22,6 +22,21 @@
   box-shadow: 0 12px 28px rgba(26, 57, 135, 0.14);
 }
 
+.announcement-bar {
+  padding: 0.55rem 1rem;
+  color: var(--white);
+  background: var(--blue-600);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.announcement-bar span {
+  margin-inline: 0.45rem;
+}
+
 *,
 *::before,
 *::after {
@@ -169,6 +184,11 @@ body {
 }
 
 @media (max-width: 699px) {
+  .announcement-bar {
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+  }
+
   .review-hero__grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
