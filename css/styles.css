@@ -1375,6 +1375,20 @@ dd {
   color: var(--blue-700);
 }
 
+.product-card__price del,
+.offer-card h3 del {
+  color: var(--ink-muted);
+  font-size: 0.9em;
+  font-weight: 400;
+}
+
+.stock-warning {
+  margin: 0.35rem 0 0;
+  color: #b42318;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
 .product-card__bundle-prices {
   display: grid;
   gap: 0.35rem;
