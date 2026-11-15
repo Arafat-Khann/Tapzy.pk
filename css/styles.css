@@ -26,25 +26,23 @@
   overflow: hidden;
   padding: 0.45rem 0;
   color: var(--white);
-  background: linear-gradient(90deg, var(--blue-700), var(--blue-600), var(--blue-700));
+  background: var(--blue-600);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   line-height: 1.5;
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   white-space: nowrap;
 }
 
 .announcement-bar__track {
-  width: 100%;
-  overflow: hidden;
+  display: flex;
+  width: max-content;
+  animation: announcement-scroll 18s linear infinite;
 }
 
 .announcement-bar__track > span {
-  display: block;
-  width: max-content;
-  padding-inline: 1rem;
-  animation: announcement-scroll 12s linear infinite;
+  flex: 0 0 auto;
+  padding-inline: 2rem;
   will-change: transform;
 }
 
@@ -56,19 +54,17 @@
 
 @keyframes announcement-scroll {
   from {
-    transform: translateX(100vw);
+    transform: translateX(0);
   }
 
   to {
-    transform: translateX(-100%);
+    transform: translateX(-25%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .announcement-bar__track > span {
+  .announcement-bar__track {
     animation: none;
-    width: 100%;
-    text-align: center;
   }
 }
 
